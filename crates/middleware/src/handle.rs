@@ -1,5 +1,5 @@
 use crate::message::{AmsMessage, AmsTray};
-use inventree::stock::{RemoveCreateBody, RemoveCreateInner, StockItemId, StockListQuery};
+use inventree::stock::{RemoveCreateBody, RemoveCreateInner, StockListQuery};
 use inventree::InventreeApiClient;
 use log::{debug, info, warn};
 use settings::SETTINGS;

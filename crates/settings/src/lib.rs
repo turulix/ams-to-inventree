@@ -1,5 +1,5 @@
-mod settings;
-mod printer;
+pub mod settings;
+pub mod printer;
 
 use crate::settings::Settings;
 use std::sync::LazyLock;

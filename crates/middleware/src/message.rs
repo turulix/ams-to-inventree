@@ -18,13 +18,13 @@ pub struct AmsMessage {
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct AmsUnit {
+    // We do not want to deserialize empty trays
     #[serde(deserialize_with = "skip_empty_trays")]
     pub tray: Vec<AmsTray>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct AmsTray {
-    pub id: String,
     pub remain: i32,
     pub tag_uid: String,
     /// For example PLA, ABS, PETG, etc.
