@@ -1,0 +1,17 @@
+[package]
+name = "ams-to-inventree"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+inventree = { path = "../inventree", package = "inventree" }
+settings = { path = "../settings", package = "settings" }
+
+tokio = { version = "1.50.0", features = ["full"] }
+rumqttc = { version = "0.25.1", features = ["use-rustls"] }
+bytes = "1.11.1"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+anyhow = "1.0.102"
+log = "0.4.29"
+env_logger = "0.11.9"
