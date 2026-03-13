@@ -6,11 +6,11 @@ use crate::handle::handle_ams_update;
 use crate::message::PrinterMessage;
 use crate::tls_validator::DangerAcceptAllCertVerifier;
 use log::{debug, error, info, warn};
-use rumqttc::Packet::Publish;
 use rumqttc::tokio_rustls::rustls::ClientConfig;
+use rumqttc::Packet::Publish;
 use rumqttc::{AsyncClient, Event, MqttOptions, Packet, QoS, Transport};
-use settings::SETTINGS;
 use settings::printer::PrinterConfig;
+use settings::SETTINGS;
 use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use tokio::sync::mpsc;
@@ -51,13 +51,13 @@ async fn monitor_printer(printer: PrinterConfig) {
         while let Some(payload) = rx.recv().await {
             match serde_json::from_str::<PrinterMessage>(&payload) {
                 Ok(serialized) => {
-                    if let Some(msg) = serialized.print.ams {
-                        if let Err(e) = handle_ams_update(&msg).await {
-                            error!(
-                                "Error handling AMS update for {}: {:?}",
-                                serial_for_processor, e
-                            );
-                        }
+                    if let Some(msg) = serialized.print.ams
+                        && let Err(e) = handle_ams_update(&msg).await
+                    {
+                        error!(
+                            "Error handling AMS update for {}: {:?}",
+                            serial_for_processor, e
+                        );
                     }
                 }
                 Err(e) => error!("JSON parse error for {}: {}", serial_for_processor, e),
