@@ -18,5 +18,3 @@ docker run --rm -v "$($PWD.Path):/local" openapitools/openapi-generator-cli gene
     --additional-properties=bestFitInt=true `
     --additional-properties=useBonBuilder=true `
     -o "/local/$TargetDir"
-
-cargo fmt -p inventree

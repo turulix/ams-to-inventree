@@ -20,7 +20,7 @@ fn main() {
         for entry in entries.flatten() {
             let file_path = entry.path();
 
-            if file_path.is_file() && file_path.extension().map_or(false, |ext| ext == "rs") {
+            if file_path.is_file() && file_path.extension().is_some_and(|ext| ext == "rs") {
                 let content = fs::read_to_string(&file_path)
                     .unwrap_or_else(|_| panic!("Failed to read {:?}", file_path));
 
