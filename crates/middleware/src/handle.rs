@@ -46,7 +46,7 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
 
                 info!(
                     "Found Spool without matching Part: {}",
-                    get_filament_match_key(&tray)
+                    get_filament_match_key(tray)
                 );
 
                 continue;
