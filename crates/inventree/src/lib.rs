@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
 #![allow(unused_imports)]
 #![allow(clippy::too_many_arguments)]
+#![allow(clippy::all)]
 
 extern crate serde;
 extern crate serde_json;
