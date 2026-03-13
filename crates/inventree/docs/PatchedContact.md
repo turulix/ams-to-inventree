@@ -1,0 +1,17 @@
+# PatchedContact
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**pk** | Option<**i32**> |  | [optional][readonly]
+**company** | Option<**i32**> |  | [optional]
+**company_name** | Option<**String**> |  | [optional][readonly]
+**name** | Option<**String**> |  | [optional]
+**phone** | Option<**String**> |  | [optional]
+**email** | Option<**String**> |  | [optional]
+**role** | Option<**String**> |  | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

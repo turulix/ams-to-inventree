@@ -1,0 +1,58 @@
+# PatchedStockItem
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**pk** | Option<**i32**> |  | [optional][readonly]
+**part** | Option<**i32**> | Base Part | [optional]
+**quantity** | Option<**f64**> |  | [optional]
+**serial** | Option<**String**> | Serial number for this item | [optional]
+**batch** | Option<**String**> | Batch code for this stock item | [optional]
+**location** | Option<**i32**> | Where is this stock item located? | [optional]
+**belongs_to** | Option<**i32**> | Is this item installed in another item? | [optional]
+**build** | Option<**i32**> | Build for this stock item | [optional]
+**consumed_by** | Option<**i32**> | Build order which consumed this stock item | [optional]
+**customer** | Option<**i32**> | Customer | [optional]
+**delete_on_deplete** | Option<**bool**> | Delete this Stock Item when stock is depleted | [optional]
+**expiry_date** | Option<[**String**](String.md)> | Expiry date for stock item. Stock will be considered expired after this date | [optional]
+**in_stock** | Option<**bool**> |  | [optional][readonly]
+**is_building** | Option<**bool**> |  | [optional]
+**link** | Option<**String**> | Link to external URL | [optional]
+**notes** | Option<**String**> | Markdown notes (optional) | [optional]
+**owner** | Option<**i32**> | Select Owner | [optional]
+**packaging** | Option<**String**> | Packaging this stock item is stored in | [optional]
+**parent** | Option<**i32**> | Parent stock item | [optional][readonly]
+**purchase_order** | Option<**i32**> | Purchase order for this stock item | [optional]
+**purchase_order_reference** | Option<**String**> |  | [optional][readonly]
+**sales_order** | Option<**i32**> |  | [optional]
+**sales_order_reference** | Option<**String**> |  | [optional][readonly]
+**status** | Option<[**models::StockItemStatusEnum**](StockItemStatusEnum.md)> |  | [optional]
+**status_text** | Option<**String**> |  | [optional][readonly]
+**status_custom_key** | Option<**i32**> | Additional status information for this item | [optional]
+**supplier_part** | Option<**i32**> | Select a matching supplier part for this stock item | [optional]
+**sku** | Option<**String**> |  | [optional][readonly]
+**mpn** | Option<**String**> |  | [optional][readonly]
+**barcode_hash** | Option<**String**> | Unique hash of barcode data | [optional][readonly]
+**updated** | Option<**String**> | Timestamp of last update | [optional][readonly]
+**stocktake_date** | Option<[**String**](String.md)> |  | [optional][readonly]
+**purchase_price** | Option<**String**> | Purchase price of this stock item, per unit or pack | [optional]
+**purchase_price_currency** | Option<**String**> | Purchase currency of this stock item | [optional]
+**use_pack_size** | Option<**bool**> | Use pack size when adding: the quantity defined is the number of packs | [optional]
+**serial_numbers** | Option<**String**> | Enter serial numbers for new items | [optional]
+**tests** | Option<[**Vec<models::StockItemTestResult>**](StockItemTestResult.md)> |  | [optional][readonly]
+**allocated** | Option<**f64**> |  | [optional][readonly]
+**expired** | Option<**bool**> |  | [optional][readonly]
+**installed_items** | Option<**i32**> |  | [optional][readonly]
+**child_items** | Option<**i32**> |  | [optional][readonly]
+**location_path** | Option<**Vec<std::collections::HashMap<String, serde_json::Value>>**> |  | [optional][readonly]
+**stale** | Option<**bool**> |  | [optional][readonly]
+**tracking_items** | Option<**i32**> |  | [optional][readonly]
+**tags** | Option<**Vec<String>**> |  | [optional]
+**supplier_part_detail** | Option<[**models::SupplierPart**](SupplierPart.md)> |  | [optional][readonly]
+**part_detail** | Option<[**models::PartBrief**](PartBrief.md)> |  | [optional][readonly]
+**location_detail** | Option<[**models::LocationBrief**](LocationBrief.md)> |  | [optional][readonly]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

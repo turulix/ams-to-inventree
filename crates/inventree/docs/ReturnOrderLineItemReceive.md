@@ -1,0 +1,12 @@
+# ReturnOrderLineItemReceive
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**item** | **i32** |  | 
+**status** | Option<**i32**> | Stock item status code | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
