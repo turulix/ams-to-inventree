@@ -32,7 +32,7 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
                 .stock_api()
                 .stock_list(
                     StockListParams::builder()
-                        .batch(tray.tag_uid)
+                        .batch(tray.tag_uid.clone())
                         .limit(10)
                         .build_struct(),
                 )
