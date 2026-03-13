@@ -16,7 +16,7 @@ pub enum Error<T> {
     ResponseError(ResponseContent<T>),
 }
 
-impl <T> fmt::Display for Error<T> {
+impl<T> fmt::Display for Error<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let (module, e) = match self {
             Error::Reqwest(e) => ("reqwest", e.to_string()),
@@ -28,7 +28,7 @@ impl <T> fmt::Display for Error<T> {
     }
 }
 
-impl <T: fmt::Debug> error::Error for Error<T> {
+impl<T: fmt::Debug> error::Error for Error<T> {
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         Some(match self {
             Error::Reqwest(e) => e,
@@ -39,19 +39,19 @@ impl <T: fmt::Debug> error::Error for Error<T> {
     }
 }
 
-impl <T> From<reqwest::Error> for Error<T> {
+impl<T> From<reqwest::Error> for Error<T> {
     fn from(e: reqwest::Error) -> Self {
         Error::Reqwest(e)
     }
 }
 
-impl <T> From<serde_json::Error> for Error<T> {
+impl<T> From<serde_json::Error> for Error<T> {
     fn from(e: serde_json::Error) -> Self {
         Error::Serde(e)
     }
 }
 
-impl <T> From<std::io::Error> for Error<T> {
+impl<T> From<std::io::Error> for Error<T> {
     fn from(e: std::io::Error) -> Self {
         Error::Io(e)
     }
@@ -78,8 +78,10 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
                             value,
                         ));
                     }
-                },
-                serde_json::Value::String(s) => params.push((format!("{}[{}]", prefix, key), s.clone())),
+                }
+                serde_json::Value::String(s) => {
+                    params.push((format!("{}[{}]", prefix, key), s.clone()))
+                }
                 _ => params.push((format!("{}[{}]", prefix, key), value.to_string())),
             }
         }
@@ -96,7 +98,7 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
 enum ContentType {
     Json,
     Text,
-    Unsupported(String)
+    Unsupported(String),
 }
 
 impl From<&str> for ContentType {
@@ -265,18 +267,28 @@ impl ApiClient {
         Self {
             action_api: Box::new(action_api::ActionApiClient::new(configuration.clone())),
             admin_api: Box::new(admin_api::AdminApiClient::new(configuration.clone())),
-            attachment_api: Box::new(attachment_api::AttachmentApiClient::new(configuration.clone())),
-            background_task_api: Box::new(background_task_api::BackgroundTaskApiClient::new(configuration.clone())),
+            attachment_api: Box::new(attachment_api::AttachmentApiClient::new(
+                configuration.clone(),
+            )),
+            background_task_api: Box::new(background_task_api::BackgroundTaskApiClient::new(
+                configuration.clone(),
+            )),
             barcode_api: Box::new(barcode_api::BarcodeApiClient::new(configuration.clone())),
             bom_api: Box::new(bom_api::BomApiClient::new(configuration.clone())),
             build_api: Box::new(build_api::BuildApiClient::new(configuration.clone())),
             company_api: Box::new(company_api::CompanyApiClient::new(configuration.clone())),
-            contenttype_api: Box::new(contenttype_api::ContenttypeApiClient::new(configuration.clone())),
+            contenttype_api: Box::new(contenttype_api::ContenttypeApiClient::new(
+                configuration.clone(),
+            )),
             currency_api: Box::new(currency_api::CurrencyApiClient::new(configuration.clone())),
-            data_output_api: Box::new(data_output_api::DataOutputApiClient::new(configuration.clone())),
+            data_output_api: Box::new(data_output_api::DataOutputApiClient::new(
+                configuration.clone(),
+            )),
             default_api: Box::new(default_api::DefaultApiClient::new(configuration.clone())),
             email_api: Box::new(email_api::EmailApiClient::new(configuration.clone())),
-            error_report_api: Box::new(error_report_api::ErrorReportApiClient::new(configuration.clone())),
+            error_report_api: Box::new(error_report_api::ErrorReportApiClient::new(
+                configuration.clone(),
+            )),
             flags_api: Box::new(flags_api::FlagsApiClient::new(configuration.clone())),
             generate_api: Box::new(generate_api::GenerateApiClient::new(configuration.clone())),
             generic_api: Box::new(generic_api::GenericApiClient::new(configuration.clone())),
@@ -288,26 +300,40 @@ impl ApiClient {
             machine_api: Box::new(machine_api::MachineApiClient::new(configuration.clone())),
             metadata_api: Box::new(metadata_api::MetadataApiClient::new(configuration.clone())),
             news_api: Box::new(news_api::NewsApiClient::new(configuration.clone())),
-            notes_image_upload_api: Box::new(notes_image_upload_api::NotesImageUploadApiClient::new(configuration.clone())),
-            notifications_api: Box::new(notifications_api::NotificationsApiClient::new(configuration.clone())),
+            notes_image_upload_api: Box::new(
+                notes_image_upload_api::NotesImageUploadApiClient::new(configuration.clone()),
+            ),
+            notifications_api: Box::new(notifications_api::NotificationsApiClient::new(
+                configuration.clone(),
+            )),
             order_api: Box::new(order_api::OrderApiClient::new(configuration.clone())),
-            parameter_api: Box::new(parameter_api::ParameterApiClient::new(configuration.clone())),
+            parameter_api: Box::new(parameter_api::ParameterApiClient::new(
+                configuration.clone(),
+            )),
             part_api: Box::new(part_api::PartApiClient::new(configuration.clone())),
             plugin_api: Box::new(plugin_api::PluginApiClient::new(configuration.clone())),
             plugins_api: Box::new(plugins_api::PluginsApiClient::new(configuration.clone())),
-            project_code_api: Box::new(project_code_api::ProjectCodeApiClient::new(configuration.clone())),
+            project_code_api: Box::new(project_code_api::ProjectCodeApiClient::new(
+                configuration.clone(),
+            )),
             report_api: Box::new(report_api::ReportApiClient::new(configuration.clone())),
             search_api: Box::new(search_api::SearchApiClient::new(configuration.clone())),
-            selection_api: Box::new(selection_api::SelectionApiClient::new(configuration.clone())),
+            selection_api: Box::new(selection_api::SelectionApiClient::new(
+                configuration.clone(),
+            )),
             settings_api: Box::new(settings_api::SettingsApiClient::new(configuration.clone())),
             stock_api: Box::new(stock_api::StockApiClient::new(configuration.clone())),
             supplier_api: Box::new(supplier_api::SupplierApiClient::new(configuration.clone())),
             system_api: Box::new(system_api::SystemApiClient::new(configuration.clone())),
-            system_internal_api: Box::new(system_internal_api::SystemInternalApiClient::new(configuration.clone())),
+            system_internal_api: Box::new(system_internal_api::SystemInternalApiClient::new(
+                configuration.clone(),
+            )),
             units_api: Box::new(units_api::UnitsApiClient::new(configuration.clone())),
             user_api: Box::new(user_api::UserApiClient::new(configuration.clone())),
             version_api: Box::new(version_api::VersionApiClient::new(configuration.clone())),
-            version_text_api: Box::new(version_text_api::VersionTextApiClient::new(configuration.clone())),
+            version_text_api: Box::new(version_text_api::VersionTextApiClient::new(
+                configuration.clone(),
+            )),
             webhook_api: Box::new(webhook_api::WebhookApiClient::new(configuration.clone())),
         }
     }
@@ -453,5 +479,3 @@ impl Api for ApiClient {
         self.webhook_api.as_ref()
     }
 }
-
-

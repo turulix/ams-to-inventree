@@ -13,7 +13,7 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
         base_path: SETTINGS.inventree_url.clone(),
         api_key: Some(ApiKey {
             key: SETTINGS.inventree_token.clone(),
-            prefix: None,
+            prefix: Some("Token".to_string()),
         }),
         ..Default::default()
     }));

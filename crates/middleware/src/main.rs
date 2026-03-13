@@ -6,11 +6,11 @@ use crate::handle::handle_ams_update;
 use crate::message::PrinterMessage;
 use crate::tls_validator::DangerAcceptAllCertVerifier;
 use log::{debug, error, info, warn};
-use rumqttc::tokio_rustls::rustls::ClientConfig;
 use rumqttc::Packet::Publish;
+use rumqttc::tokio_rustls::rustls::ClientConfig;
 use rumqttc::{AsyncClient, Event, MqttOptions, Packet, QoS, Transport};
-use settings::printer::PrinterConfig;
 use settings::SETTINGS;
+use settings::printer::PrinterConfig;
 use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use tokio::sync::mpsc;
@@ -106,7 +106,10 @@ async fn monitor_printer(printer: PrinterConfig) {
                 if let Err(e) = client.subscribe(&topic, QoS::AtMostOnce).await {
                     error!("Failed to subscribe for {}: {:?}", printer.serial, e);
                 } else {
-                    info!("Subscribed to topic '{}' for printer {}", topic, printer.serial);
+                    info!(
+                        "Subscribed to topic '{}' for printer {}",
+                        topic, printer.serial
+                    );
                 }
             }
             Ok(Event::Incoming(Publish(x))) => {
