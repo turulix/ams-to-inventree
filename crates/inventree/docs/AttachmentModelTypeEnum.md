@@ -4,15 +4,15 @@
 
 | Name | Value |
 |---- | -----|
+| Part | part |
+| Manufacturerpart | manufacturerpart |
 | Build | build |
 | Company | company |
 | Supplierpart | supplierpart |
-| Manufacturerpart | manufacturerpart |
 | Purchaseorder | purchaseorder |
 | Salesorder | salesorder |
 | Salesordershipment | salesordershipment |
 | Returnorder | returnorder |
-| Part | part |
 | Stockitem | stockitem |
 
 

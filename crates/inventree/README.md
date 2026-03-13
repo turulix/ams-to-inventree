@@ -22,10 +22,30 @@ inventree = { path = "./inventree" }
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://inv.turulix.de*
+All URIs are relative to *http://localhost:8000*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*Account2FaApi* | [**allauth_account_authenticators_get**](docs/Account2FaApi.md#allauth_account_authenticators_get) | **GET** /api/auth/v1/account/authenticators | List authenticators
+*Account2FaApi* | [**allauth_account_authenticators_recovery_codes_get**](docs/Account2FaApi.md#allauth_account_authenticators_recovery_codes_get) | **GET** /api/auth/v1/account/authenticators/recovery-codes | List recovery codes
+*Account2FaApi* | [**allauth_account_authenticators_recovery_codes_post**](docs/Account2FaApi.md#allauth_account_authenticators_recovery_codes_post) | **POST** /api/auth/v1/account/authenticators/recovery-codes | Regenerate recovery codes
+*Account2FaApi* | [**allauth_account_authenticators_totp_delete**](docs/Account2FaApi.md#allauth_account_authenticators_totp_delete) | **DELETE** /api/auth/v1/account/authenticators/totp | Deactivate TOTP
+*Account2FaApi* | [**allauth_account_authenticators_totp_get**](docs/Account2FaApi.md#allauth_account_authenticators_totp_get) | **GET** /api/auth/v1/account/authenticators/totp | TOTP authenticator status
+*Account2FaApi* | [**allauth_account_authenticators_totp_post**](docs/Account2FaApi.md#allauth_account_authenticators_totp_post) | **POST** /api/auth/v1/account/authenticators/totp | Activate TOTP
+*AccountEmailApi* | [**allauth_account_email_delete**](docs/AccountEmailApi.md#allauth_account_email_delete) | **DELETE** /api/auth/v1/account/email | Remove an email address
+*AccountEmailApi* | [**allauth_account_email_get**](docs/AccountEmailApi.md#allauth_account_email_get) | **GET** /api/auth/v1/account/email | List email addresses
+*AccountEmailApi* | [**allauth_account_email_patch**](docs/AccountEmailApi.md#allauth_account_email_patch) | **PATCH** /api/auth/v1/account/email | Change primary email address
+*AccountEmailApi* | [**allauth_account_email_post**](docs/AccountEmailApi.md#allauth_account_email_post) | **POST** /api/auth/v1/account/email | Add/Change email address 
+*AccountEmailApi* | [**allauth_account_email_put**](docs/AccountEmailApi.md#allauth_account_email_put) | **PUT** /api/auth/v1/account/email | Request email verification
+*AccountPasswordApi* | [**allauth_account_password_change_post**](docs/AccountPasswordApi.md#allauth_account_password_change_post) | **POST** /api/auth/v1/account/password/change | Change password
+*AccountPhoneApi* | [**allauth_account_phone_get**](docs/AccountPhoneApi.md#allauth_account_phone_get) | **GET** /api/auth/v1/account/phone | Get the phone number
+*AccountPhoneApi* | [**allauth_account_phone_post**](docs/AccountPhoneApi.md#allauth_account_phone_post) | **POST** /api/auth/v1/account/phone | Change the phone number 
+*AccountProvidersApi* | [**allauth_account_providers_delete**](docs/AccountProvidersApi.md#allauth_account_providers_delete) | **DELETE** /api/auth/v1/account/providers | Disconnect a third-party provider account 
+*AccountProvidersApi* | [**allauth_account_providers_get**](docs/AccountProvidersApi.md#allauth_account_providers_get) | **GET** /api/auth/v1/account/providers | List the connected third-party provider accounts
+*AccountWebAuthnApi* | [**allauth_account_authenticators_webauthn_delete**](docs/AccountWebAuthnApi.md#allauth_account_authenticators_webauthn_delete) | **DELETE** /api/auth/v1/account/authenticators/webauthn | Delete a WebAuthn credential 
+*AccountWebAuthnApi* | [**allauth_account_authenticators_webauthn_get**](docs/AccountWebAuthnApi.md#allauth_account_authenticators_webauthn_get) | **GET** /api/auth/v1/account/authenticators/webauthn | Get WebAuthn credential creation options 
+*AccountWebAuthnApi* | [**allauth_account_authenticators_webauthn_post**](docs/AccountWebAuthnApi.md#allauth_account_authenticators_webauthn_post) | **POST** /api/auth/v1/account/authenticators/webauthn | Add a WebAuthn credential 
+*AccountWebAuthnApi* | [**allauth_account_authenticators_webauthn_put**](docs/AccountWebAuthnApi.md#allauth_account_authenticators_webauthn_put) | **PUT** /api/auth/v1/account/authenticators/webauthn | Rename a WebAuthn credential 
 *ActionApi* | [**action_create**](docs/ActionApi.md#action_create) | **POST** /api/action/ | 
 *AdminApi* | [**admin_config_list**](docs/AdminApi.md#admin_config_list) | **GET** /api/admin/config/ | 
 *AdminApi* | [**admin_config_retrieve**](docs/AdminApi.md#admin_config_retrieve) | **GET** /api/admin/config/{key}/ | 
@@ -41,6 +61,37 @@ Class | Method | HTTP request | Description
 *AttachmentApi* | [**attachment_partial_update**](docs/AttachmentApi.md#attachment_partial_update) | **PATCH** /api/attachment/{id}/ | 
 *AttachmentApi* | [**attachment_retrieve**](docs/AttachmentApi.md#attachment_retrieve) | **GET** /api/attachment/{id}/ | 
 *AttachmentApi* | [**attachment_update**](docs/AttachmentApi.md#attachment_update) | **PUT** /api/attachment/{id}/ | 
+*Authentication2FaApi* | [**allauth_auth2fa_authenticate_post**](docs/Authentication2FaApi.md#allauth_auth2fa_authenticate_post) | **POST** /api/auth/v1/auth/2fa/authenticate | Two-factor authentication
+*Authentication2FaApi* | [**allauth_auth2fa_reauthenticate_post**](docs/Authentication2FaApi.md#allauth_auth2fa_reauthenticate_post) | **POST** /api/auth/v1/auth/2fa/reauthenticate | Reauthenticate using 2FA
+*Authentication2FaApi* | [**allauth_auth2fa_trust_post**](docs/Authentication2FaApi.md#allauth_auth2fa_trust_post) | **POST** /api/auth/v1/auth/2fa/trust | Trust this browser
+*AuthenticationAccountApi* | [**allauth_auth_email_verify_get**](docs/AuthenticationAccountApi.md#allauth_auth_email_verify_get) | **GET** /api/auth/v1/auth/email/verify | Get email verification information
+*AuthenticationAccountApi* | [**allauth_auth_email_verify_post**](docs/AuthenticationAccountApi.md#allauth_auth_email_verify_post) | **POST** /api/auth/v1/auth/email/verify | Verify an email
+*AuthenticationAccountApi* | [**allauth_auth_email_verify_resend_post**](docs/AuthenticationAccountApi.md#allauth_auth_email_verify_resend_post) | **POST** /api/auth/v1/auth/email/verify/resend | Resend email verification code
+*AuthenticationAccountApi* | [**allauth_auth_login_post**](docs/AuthenticationAccountApi.md#allauth_auth_login_post) | **POST** /api/auth/v1/auth/login | Login
+*AuthenticationAccountApi* | [**allauth_auth_phone_verify_post**](docs/AuthenticationAccountApi.md#allauth_auth_phone_verify_post) | **POST** /api/auth/v1/auth/phone/verify | Verify a phone number
+*AuthenticationAccountApi* | [**allauth_auth_phone_verify_resend_post**](docs/AuthenticationAccountApi.md#allauth_auth_phone_verify_resend_post) | **POST** /api/auth/v1/auth/phone/verify/resend | Resend phone number verification code
+*AuthenticationAccountApi* | [**allauth_auth_reauthenticate_post**](docs/AuthenticationAccountApi.md#allauth_auth_reauthenticate_post) | **POST** /api/auth/v1/auth/reauthenticate | Reauthenticate
+*AuthenticationAccountApi* | [**allauth_auth_signup_post**](docs/AuthenticationAccountApi.md#allauth_auth_signup_post) | **POST** /api/auth/v1/auth/signup | Signup
+*AuthenticationCurrentSessionApi* | [**allauth_auth_session_delete**](docs/AuthenticationCurrentSessionApi.md#allauth_auth_session_delete) | **DELETE** /api/auth/v1/auth/session | Logout
+*AuthenticationCurrentSessionApi* | [**allauth_auth_session_get**](docs/AuthenticationCurrentSessionApi.md#allauth_auth_session_get) | **GET** /api/auth/v1/auth/session | Get authentication status 
+*AuthenticationLoginByCodeApi* | [**allauth_auth_code_confirm_post**](docs/AuthenticationLoginByCodeApi.md#allauth_auth_code_confirm_post) | **POST** /api/auth/v1/auth/code/confirm | Confirm login code
+*AuthenticationLoginByCodeApi* | [**allauth_auth_code_request_post**](docs/AuthenticationLoginByCodeApi.md#allauth_auth_code_request_post) | **POST** /api/auth/v1/auth/code/request | Request login code
+*AuthenticationPasswordResetApi* | [**allauth_auth_password_request_post**](docs/AuthenticationPasswordResetApi.md#allauth_auth_password_request_post) | **POST** /api/auth/v1/auth/password/request | Request password
+*AuthenticationPasswordResetApi* | [**allauth_auth_password_reset_get**](docs/AuthenticationPasswordResetApi.md#allauth_auth_password_reset_get) | **GET** /api/auth/v1/auth/password/reset | Get password reset information
+*AuthenticationPasswordResetApi* | [**allauth_auth_password_reset_post**](docs/AuthenticationPasswordResetApi.md#allauth_auth_password_reset_post) | **POST** /api/auth/v1/auth/password/reset | Reset password
+*AuthenticationProvidersApi* | [**allauth_auth_provider_redirect_post**](docs/AuthenticationProvidersApi.md#allauth_auth_provider_redirect_post) | **POST** /api/auth/v1/auth/provider/redirect | Provider redirect
+*AuthenticationProvidersApi* | [**allauth_auth_provider_signup_get**](docs/AuthenticationProvidersApi.md#allauth_auth_provider_signup_get) | **GET** /api/auth/v1/auth/provider/signup | Provider signup information
+*AuthenticationProvidersApi* | [**allauth_auth_provider_signup_post**](docs/AuthenticationProvidersApi.md#allauth_auth_provider_signup_post) | **POST** /api/auth/v1/auth/provider/signup | Provider signup
+*AuthenticationProvidersApi* | [**allauth_auth_provider_token_post**](docs/AuthenticationProvidersApi.md#allauth_auth_provider_token_post) | **POST** /api/auth/v1/auth/provider/token | Provider token
+*AuthenticationWebAuthnLoginApi* | [**allauth_auth_webauthn_authenticate_get**](docs/AuthenticationWebAuthnLoginApi.md#allauth_auth_webauthn_authenticate_get) | **GET** /api/auth/v1/auth/webauthn/authenticate | Get WebAuthn credential request options for 2FA
+*AuthenticationWebAuthnLoginApi* | [**allauth_auth_webauthn_authenticate_post**](docs/AuthenticationWebAuthnLoginApi.md#allauth_auth_webauthn_authenticate_post) | **POST** /api/auth/v1/auth/webauthn/authenticate | Perform 2FA using WebAuthn
+*AuthenticationWebAuthnLoginApi* | [**allauth_auth_webauthn_login_get**](docs/AuthenticationWebAuthnLoginApi.md#allauth_auth_webauthn_login_get) | **GET** /api/auth/v1/auth/webauthn/login | Get WebAuthn credential request options for login
+*AuthenticationWebAuthnLoginApi* | [**allauth_auth_webauthn_login_post**](docs/AuthenticationWebAuthnLoginApi.md#allauth_auth_webauthn_login_post) | **POST** /api/auth/v1/auth/webauthn/login | Login using WebAuthn
+*AuthenticationWebAuthnLoginApi* | [**allauth_auth_webauthn_reauthenticate_get**](docs/AuthenticationWebAuthnLoginApi.md#allauth_auth_webauthn_reauthenticate_get) | **GET** /api/auth/v1/auth/webauthn/reauthenticate | Get WebAuthn credential request options for reauthentication
+*AuthenticationWebAuthnLoginApi* | [**allauth_auth_webauthn_reauthenticate_post**](docs/AuthenticationWebAuthnLoginApi.md#allauth_auth_webauthn_reauthenticate_post) | **POST** /api/auth/v1/auth/webauthn/reauthenticate | Reauthenticate using WebAuthn
+*AuthenticationWebAuthnSignupApi* | [**allauth_auth_webauthn_signup_get**](docs/AuthenticationWebAuthnSignupApi.md#allauth_auth_webauthn_signup_get) | **GET** /api/auth/v1/auth/webauthn/signup | Get passkey credential request options
+*AuthenticationWebAuthnSignupApi* | [**allauth_auth_webauthn_signup_post**](docs/AuthenticationWebAuthnSignupApi.md#allauth_auth_webauthn_signup_post) | **POST** /api/auth/v1/auth/webauthn/signup | Initiate the passkey signup flow
+*AuthenticationWebAuthnSignupApi* | [**allauth_auth_webauthn_signup_put**](docs/AuthenticationWebAuthnSignupApi.md#allauth_auth_webauthn_signup_put) | **PUT** /api/auth/v1/auth/webauthn/signup | Complete the passkey signup flow
 *BackgroundTaskApi* | [**background_task_failed_bulk_destroy**](docs/BackgroundTaskApi.md#background_task_failed_bulk_destroy) | **DELETE** /api/background-task/failed/ | 
 *BackgroundTaskApi* | [**background_task_failed_list**](docs/BackgroundTaskApi.md#background_task_failed_list) | **GET** /api/background-task/failed/ | 
 *BackgroundTaskApi* | [**background_task_pending_bulk_destroy**](docs/BackgroundTaskApi.md#background_task_pending_bulk_destroy) | **DELETE** /api/background-task/pending/ | 
@@ -145,6 +196,7 @@ Class | Method | HTTP request | Description
 *CompanyApi* | [**company_price_break_update**](docs/CompanyApi.md#company_price_break_update) | **PUT** /api/company/price-break/{id}/ | 
 *CompanyApi* | [**company_retrieve**](docs/CompanyApi.md#company_retrieve) | **GET** /api/company/{id}/ | 
 *CompanyApi* | [**company_update**](docs/CompanyApi.md#company_update) | **PUT** /api/company/{id}/ | 
+*ConfigurationApi* | [**allauth_config_get**](docs/ConfigurationApi.md#allauth_config_get) | **GET** /api/auth/v1/config | Get configuration
 *ContenttypeApi* | [**contenttype_list**](docs/ContenttypeApi.md#contenttype_list) | **GET** /api/contenttype/ | 
 *ContenttypeApi* | [**contenttype_retrieve**](docs/ContenttypeApi.md#contenttype_retrieve) | **GET** /api/contenttype/{id}/ | 
 *ContenttypeApi* | [**contenttype_retrieve_model**](docs/ContenttypeApi.md#contenttype_retrieve_model) | **GET** /api/contenttype/model/{model}/ | 
@@ -409,18 +461,6 @@ Class | Method | HTTP request | Description
 *PartApi* | [**part_thumbs_retrieve**](docs/PartApi.md#part_thumbs_retrieve) | **GET** /api/part/thumbs/{id}/ | 
 *PartApi* | [**part_thumbs_update**](docs/PartApi.md#part_thumbs_update) | **PUT** /api/part/thumbs/{id}/ | 
 *PartApi* | [**part_update**](docs/PartApi.md#part_update) | **PUT** /api/part/{id}/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_api_category_create**](docs/PluginApi.md#plugin_kicad_library_plugin_api_category_create) | **POST** /plugin/kicad-library-plugin/api/category/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_api_category_destroy**](docs/PluginApi.md#plugin_kicad_library_plugin_api_category_destroy) | **DELETE** /plugin/kicad-library-plugin/api/category/{id}/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_api_category_list**](docs/PluginApi.md#plugin_kicad_library_plugin_api_category_list) | **GET** /plugin/kicad-library-plugin/api/category/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_api_category_partial_update**](docs/PluginApi.md#plugin_kicad_library_plugin_api_category_partial_update) | **PATCH** /plugin/kicad-library-plugin/api/category/{id}/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_api_category_retrieve**](docs/PluginApi.md#plugin_kicad_library_plugin_api_category_retrieve) | **GET** /plugin/kicad-library-plugin/api/category/{id}/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_api_category_update**](docs/PluginApi.md#plugin_kicad_library_plugin_api_category_update) | **PUT** /plugin/kicad-library-plugin/api/category/{id}/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_retrieve**](docs/PluginApi.md#plugin_kicad_library_plugin_retrieve) | **GET** /plugin/kicad-library-plugin/. | 
-*PluginApi* | [**plugin_kicad_library_plugin_v1_categories_list**](docs/PluginApi.md#plugin_kicad_library_plugin_v1_categories_list) | **GET** /plugin/kicad-library-plugin/v1/categories{var}/ | 
-*PluginApi* | [**plugin_kicad_library_plugin_v1_parts_category_json_retrieve**](docs/PluginApi.md#plugin_kicad_library_plugin_v1_parts_category_json_retrieve) | **GET** /plugin/kicad-library-plugin/v1/parts/category/{id}.json | 
-*PluginApi* | [**plugin_kicad_library_plugin_v1_parts_json_retrieve**](docs/PluginApi.md#plugin_kicad_library_plugin_v1_parts_json_retrieve) | **GET** /plugin/kicad-library-plugin/v1/parts/{id}.json | 
-*PluginApi* | [**plugin_kicad_library_plugin_v1_parts_retrieve**](docs/PluginApi.md#plugin_kicad_library_plugin_v1_parts_retrieve) | **GET** /plugin/kicad-library-plugin/v1/parts/. | 
-*PluginApi* | [**plugin_kicad_library_plugin_v1_retrieve**](docs/PluginApi.md#plugin_kicad_library_plugin_v1_retrieve) | **GET** /plugin/kicad-library-plugin/v1/. | 
 *PluginsApi* | [**plugins_activate_partial_update**](docs/PluginsApi.md#plugins_activate_partial_update) | **PATCH** /api/plugins/{plugin}/activate/ | 
 *PluginsApi* | [**plugins_activate_update**](docs/PluginsApi.md#plugins_activate_update) | **PUT** /api/plugins/{plugin}/activate/ | 
 *PluginsApi* | [**plugins_admin_retrieve**](docs/PluginsApi.md#plugins_admin_retrieve) | **GET** /api/plugins/{plugin}/admin/ | 
@@ -480,6 +520,8 @@ Class | Method | HTTP request | Description
 *SelectionApi* | [**selection_partial_update**](docs/SelectionApi.md#selection_partial_update) | **PATCH** /api/selection/{id}/ | 
 *SelectionApi* | [**selection_retrieve**](docs/SelectionApi.md#selection_retrieve) | **GET** /api/selection/{id}/ | 
 *SelectionApi* | [**selection_update**](docs/SelectionApi.md#selection_update) | **PUT** /api/selection/{id}/ | 
+*SessionsApi* | [**allauth_auth_sessions_delete**](docs/SessionsApi.md#allauth_auth_sessions_delete) | **DELETE** /api/auth/v1/auth/sessions | End one or more sessions
+*SessionsApi* | [**allauth_auth_sessions_get**](docs/SessionsApi.md#allauth_auth_sessions_get) | **GET** /api/auth/v1/auth/sessions | List sessions
 *SettingsApi* | [**settings_global_list**](docs/SettingsApi.md#settings_global_list) | **GET** /api/settings/global/ | 
 *SettingsApi* | [**settings_global_partial_update**](docs/SettingsApi.md#settings_global_partial_update) | **PATCH** /api/settings/global/{key}/ | 
 *SettingsApi* | [**settings_global_retrieve**](docs/SettingsApi.md#settings_global_retrieve) | **GET** /api/settings/global/{key}/ | 
@@ -539,6 +581,7 @@ Class | Method | HTTP request | Description
 *SupplierApi* | [**supplier_search_list**](docs/SupplierApi.md#supplier_search_list) | **GET** /api/supplier/search/ | 
 *SystemApi* | [**system_health_retrieve**](docs/SystemApi.md#system_health_retrieve) | **GET** /api/system/health/ | 
 *SystemInternalApi* | [**system_internal_observability_end_create**](docs/SystemInternalApi.md#system_internal_observability_end_create) | **POST** /api/system-internal/observability/end | 
+*TokensApi* | [**allauth_tokens_refresh_get**](docs/TokensApi.md#allauth_tokens_refresh_get) | **GET** /api/auth/v1/tokens/refresh | Refresh the access token 
 *UnitsApi* | [**units_all_retrieve**](docs/UnitsApi.md#units_all_retrieve) | **GET** /api/units/all/ | 
 *UnitsApi* | [**units_create**](docs/UnitsApi.md#units_create) | **POST** /api/units/ | 
 *UnitsApi* | [**units_destroy**](docs/UnitsApi.md#units_destroy) | **DELETE** /api/units/{id}/ | 
@@ -593,10 +636,121 @@ Class | Method | HTTP request | Description
  - [Address](docs/Address.md)
  - [AddressBrief](docs/AddressBrief.md)
  - [AllUnitListResponse](docs/AllUnitListResponse.md)
+ - [AllauthAccountAuthenticatorsGet200Response](docs/AllauthAccountAuthenticatorsGet200Response.md)
+ - [AllauthAccountAuthenticatorsRecoveryCodesGet200Response](docs/AllauthAccountAuthenticatorsRecoveryCodesGet200Response.md)
+ - [AllauthAccountAuthenticatorsRecoveryCodesGet404Response](docs/AllauthAccountAuthenticatorsRecoveryCodesGet404Response.md)
+ - [AllauthAccountAuthenticatorsTotpGet200Response](docs/AllauthAccountAuthenticatorsTotpGet200Response.md)
+ - [AllauthAccountAuthenticatorsTotpGet200ResponseMeta](docs/AllauthAccountAuthenticatorsTotpGet200ResponseMeta.md)
+ - [AllauthAccountAuthenticatorsTotpGet404Response](docs/AllauthAccountAuthenticatorsTotpGet404Response.md)
+ - [AllauthAccountAuthenticatorsTotpGet404ResponseMeta](docs/AllauthAccountAuthenticatorsTotpGet404ResponseMeta.md)
+ - [AllauthAccountAuthenticatorsTotpPostRequest](docs/AllauthAccountAuthenticatorsTotpPostRequest.md)
+ - [AllauthAccountAuthenticatorsWebauthnDeleteRequest](docs/AllauthAccountAuthenticatorsWebauthnDeleteRequest.md)
+ - [AllauthAccountAuthenticatorsWebauthnGet200Response](docs/AllauthAccountAuthenticatorsWebauthnGet200Response.md)
+ - [AllauthAccountAuthenticatorsWebauthnPost200Response](docs/AllauthAccountAuthenticatorsWebauthnPost200Response.md)
+ - [AllauthAccountAuthenticatorsWebauthnPost200ResponseMeta](docs/AllauthAccountAuthenticatorsWebauthnPost200ResponseMeta.md)
+ - [AllauthAccountAuthenticatorsWebauthnPut200Response](docs/AllauthAccountAuthenticatorsWebauthnPut200Response.md)
+ - [AllauthAccountAuthenticatorsWebauthnPutRequest](docs/AllauthAccountAuthenticatorsWebauthnPutRequest.md)
+ - [AllauthAccountConfiguration](docs/AllauthAccountConfiguration.md)
+ - [AllauthAccountEmailGet200Response](docs/AllauthAccountEmailGet200Response.md)
+ - [AllauthAccountEmailPatchRequest](docs/AllauthAccountEmailPatchRequest.md)
+ - [AllauthAccountEmailPost401Response](docs/AllauthAccountEmailPost401Response.md)
+ - [AllauthAccountEmailPutRequest](docs/AllauthAccountEmailPutRequest.md)
+ - [AllauthAccountPasswordChangePostRequest](docs/AllauthAccountPasswordChangePostRequest.md)
+ - [AllauthAccountPhonePostRequest](docs/AllauthAccountPhonePostRequest.md)
+ - [AllauthAccountProvidersDeleteRequest](docs/AllauthAccountProvidersDeleteRequest.md)
+ - [AllauthAccountProvidersGet200Response](docs/AllauthAccountProvidersGet200Response.md)
+ - [AllauthAuthEmailVerifyResendPost200Response](docs/AllauthAuthEmailVerifyResendPost200Response.md)
+ - [AllauthAuthEmailVerifyResendPost429Response](docs/AllauthAuthEmailVerifyResendPost429Response.md)
+ - [AllauthAuthPasswordResetGet200Response](docs/AllauthAuthPasswordResetGet200Response.md)
+ - [AllauthAuthPasswordResetGet200ResponseData](docs/AllauthAuthPasswordResetGet200ResponseData.md)
+ - [AllauthAuthProviderSignupGet200Response](docs/AllauthAuthProviderSignupGet200Response.md)
+ - [AllauthAuthProviderSignupGet200ResponseData](docs/AllauthAuthProviderSignupGet200ResponseData.md)
+ - [AllauthAuthSessionsGet200Response](docs/AllauthAuthSessionsGet200Response.md)
+ - [AllauthAuthWebauthnAuthenticateGet200Response](docs/AllauthAuthWebauthnAuthenticateGet200Response.md)
+ - [AllauthAuthWebauthnAuthenticatePostRequest](docs/AllauthAuthWebauthnAuthenticatePostRequest.md)
+ - [AllauthAuthWebauthnSignupPutRequest](docs/AllauthAuthWebauthnSignupPutRequest.md)
+ - [AllauthAuthenticated](docs/AllauthAuthenticated.md)
+ - [AllauthAuthenticatedMeta](docs/AllauthAuthenticatedMeta.md)
+ - [AllauthAuthenticatedResponse](docs/AllauthAuthenticatedResponse.md)
+ - [AllauthAuthenticationMeta](docs/AllauthAuthenticationMeta.md)
+ - [AllauthAuthenticationMethod](docs/AllauthAuthenticationMethod.md)
+ - [AllauthAuthenticationMethodMethodEnum](docs/AllauthAuthenticationMethodMethodEnum.md)
+ - [AllauthAuthenticationResponse](docs/AllauthAuthenticationResponse.md)
+ - [AllauthAuthenticationResponseData](docs/AllauthAuthenticationResponseData.md)
+ - [AllauthAuthenticatorListInner](docs/AllauthAuthenticatorListInner.md)
+ - [AllauthAuthenticatorType](docs/AllauthAuthenticatorType.md)
+ - [AllauthBaseAuthenticationMeta](docs/AllauthBaseAuthenticationMeta.md)
+ - [AllauthBaseAuthenticator](docs/AllauthBaseAuthenticator.md)
+ - [AllauthBaseSignup](docs/AllauthBaseSignup.md)
+ - [AllauthConfigurationResponse](docs/AllauthConfigurationResponse.md)
+ - [AllauthConfigurationResponseData](docs/AllauthConfigurationResponseData.md)
+ - [AllauthConfirmLoginCode](docs/AllauthConfirmLoginCode.md)
+ - [AllauthConflictResponse](docs/AllauthConflictResponse.md)
+ - [AllauthConflictResponseStatusEnum](docs/AllauthConflictResponseStatusEnum.md)
+ - [AllauthEmailAddress](docs/AllauthEmailAddress.md)
+ - [AllauthEmailVerificationInfo](docs/AllauthEmailVerificationInfo.md)
+ - [AllauthEmailVerificationInfoData](docs/AllauthEmailVerificationInfoData.md)
+ - [AllauthEmailVerificationInfoMeta](docs/AllauthEmailVerificationInfoMeta.md)
+ - [AllauthEndSessions](docs/AllauthEndSessions.md)
+ - [AllauthErrorResponse](docs/AllauthErrorResponse.md)
+ - [AllauthErrorResponseErrorsInner](docs/AllauthErrorResponseErrorsInner.md)
+ - [AllauthErrorResponseStatusEnum](docs/AllauthErrorResponseStatusEnum.md)
+ - [AllauthFlow](docs/AllauthFlow.md)
+ - [AllauthForbiddenResponse](docs/AllauthForbiddenResponse.md)
+ - [AllauthForbiddenResponseStatusEnum](docs/AllauthForbiddenResponseStatusEnum.md)
+ - [AllauthLogin](docs/AllauthLogin.md)
+ - [AllauthMfaAuthenticate](docs/AllauthMfaAuthenticate.md)
+ - [AllauthMfaConfiguration](docs/AllauthMfaConfiguration.md)
+ - [AllauthMfaTrust](docs/AllauthMfaTrust.md)
+ - [AllauthPasskeySignup](docs/AllauthPasskeySignup.md)
+ - [AllauthPhoneNumber](docs/AllauthPhoneNumber.md)
+ - [AllauthPhoneNumberChangeResponse](docs/AllauthPhoneNumberChangeResponse.md)
+ - [AllauthPhoneNumbersResponse](docs/AllauthPhoneNumbersResponse.md)
+ - [AllauthProcess](docs/AllauthProcess.md)
+ - [AllauthProvider](docs/AllauthProvider.md)
+ - [AllauthProviderAccount](docs/AllauthProviderAccount.md)
+ - [AllauthProviderSignup](docs/AllauthProviderSignup.md)
+ - [AllauthProviderToken](docs/AllauthProviderToken.md)
+ - [AllauthProviderTokenToken](docs/AllauthProviderTokenToken.md)
+ - [AllauthReauthenticate](docs/AllauthReauthenticate.md)
+ - [AllauthReauthenticationRequired](docs/AllauthReauthenticationRequired.md)
+ - [AllauthReauthenticationResponse](docs/AllauthReauthenticationResponse.md)
+ - [AllauthRecoveryCodesAuthenticator](docs/AllauthRecoveryCodesAuthenticator.md)
+ - [AllauthRecoveryCodesAuthenticatorTypeEnum](docs/AllauthRecoveryCodesAuthenticatorTypeEnum.md)
+ - [AllauthRequestLoginCode](docs/AllauthRequestLoginCode.md)
+ - [AllauthRequestPassword](docs/AllauthRequestPassword.md)
+ - [AllauthResetPassword](docs/AllauthResetPassword.md)
+ - [AllauthSensitiveRecoveryCodesAuthenticator](docs/AllauthSensitiveRecoveryCodesAuthenticator.md)
+ - [AllauthSession](docs/AllauthSession.md)
+ - [AllauthSessionGoneResponse](docs/AllauthSessionGoneResponse.md)
+ - [AllauthSessionGoneResponseStatusEnum](docs/AllauthSessionGoneResponseStatusEnum.md)
+ - [AllauthSignup](docs/AllauthSignup.md)
+ - [AllauthSocialAccountConfiguration](docs/AllauthSocialAccountConfiguration.md)
+ - [AllauthStatusAccepted](docs/AllauthStatusAccepted.md)
+ - [AllauthStatusOk](docs/AllauthStatusOk.md)
+ - [AllauthTokensRefreshGet200Response](docs/AllauthTokensRefreshGet200Response.md)
+ - [AllauthTokensRefreshGet200ResponseData](docs/AllauthTokensRefreshGet200ResponseData.md)
+ - [AllauthTokensRefreshGetRequest](docs/AllauthTokensRefreshGetRequest.md)
+ - [AllauthTotpAuthenticator](docs/AllauthTotpAuthenticator.md)
+ - [AllauthTotpAuthenticatorTypeEnum](docs/AllauthTotpAuthenticatorTypeEnum.md)
+ - [AllauthUser](docs/AllauthUser.md)
+ - [AllauthUserId](docs/AllauthUserId.md)
+ - [AllauthUserSessionsConfiguration](docs/AllauthUserSessionsConfiguration.md)
+ - [AllauthVerifyEmail](docs/AllauthVerifyEmail.md)
+ - [AllauthVerifyPhone](docs/AllauthVerifyPhone.md)
+ - [AllauthWebAuthnAuthenticator](docs/AllauthWebAuthnAuthenticator.md)
+ - [AllauthWebAuthnAuthenticatorTypeEnum](docs/AllauthWebAuthnAuthenticatorTypeEnum.md)
+ - [AllauthWebAuthnCredentialCreationOptions](docs/AllauthWebAuthnCredentialCreationOptions.md)
+ - [AllauthWebAuthnCredentialRequestOptions](docs/AllauthWebAuthnCredentialRequestOptions.md)
  - [ApiSearchView](docs/ApiSearchView.md)
  - [ApiToken](docs/ApiToken.md)
  - [Attachment](docs/Attachment.md)
  - [AttachmentModelTypeEnum](docs/AttachmentModelTypeEnum.md)
+ - [AuthenticatedAfterPasswordReset](docs/AuthenticatedAfterPasswordReset.md)
+ - [AuthenticatedByConfirmingACodeSentByEmail](docs/AuthenticatedByConfirmingACodeSentByEmail.md)
+ - [AuthenticatedByConfirmingACodeSentByPhone](docs/AuthenticatedByConfirmingACodeSentByPhone.md)
+ - [AuthenticatedByThirdPartyProvider](docs/AuthenticatedByThirdPartyProvider.md)
+ - [AuthenticatedByUsernameEmailLogin](docs/AuthenticatedByUsernameEmailLogin.md)
  - [Barcode](docs/Barcode.md)
  - [BarcodeAssign](docs/BarcodeAssign.md)
  - [BarcodeGenerate](docs/BarcodeGenerate.md)
@@ -663,6 +817,7 @@ Class | Method | HTTP request | Description
  - [ExtendedUser](docs/ExtendedUser.md)
  - [FailedTask](docs/FailedTask.md)
  - [Flag](docs/Flag.md)
+ - [FlowsEnum](docs/FlowsEnum.md)
  - [GenerateBatchCode](docs/GenerateBatchCode.md)
  - [GenerateSerialNumber](docs/GenerateSerialNumber.md)
  - [GenericStateClass](docs/GenericStateClass.md)
@@ -675,6 +830,7 @@ Class | Method | HTTP request | Description
  - [HealthCheckStatusStatusEnum](docs/HealthCheckStatusStatusEnum.md)
  - [Icon](docs/Icon.md)
  - [IconPackage](docs/IconPackage.md)
+ - [IdEnum](docs/IdEnum.md)
  - [ImportParameter](docs/ImportParameter.md)
  - [ImportRequest](docs/ImportRequest.md)
  - [ImportResult](docs/ImportResult.md)
@@ -682,8 +838,6 @@ Class | Method | HTTP request | Description
  - [InitialStock](docs/InitialStock.md)
  - [InitialSupplier](docs/InitialSupplier.md)
  - [InstallStockItem](docs/InstallStockItem.md)
- - [KicadCategory](docs/KicadCategory.md)
- - [KicadDetailedCategory](docs/KicadDetailedCategory.md)
  - [LabelPrint](docs/LabelPrint.md)
  - [LabelTemplate](docs/LabelTemplate.md)
  - [LicenseView](docs/LicenseView.md)
@@ -692,6 +846,7 @@ Class | Method | HTTP request | Description
  - [Location](docs/Location.md)
  - [LocationBrief](docs/LocationBrief.md)
  - [LocationTree](docs/LocationTree.md)
+ - [LoginMethodsEnum](docs/LoginMethodsEnum.md)
  - [MachineConfig](docs/MachineConfig.md)
  - [MachineConfigCreate](docs/MachineConfigCreate.md)
  - [MachineDriver](docs/MachineDriver.md)
@@ -704,9 +859,9 @@ Class | Method | HTTP request | Description
  - [MachineType](docs/MachineType.md)
  - [ManufacturerPart](docs/ManufacturerPart.md)
  - [MeUser](docs/MeUser.md)
+ - [Metadata](docs/Metadata.md)
  - [ModelType4f8Enum](docs/ModelType4f8Enum.md)
  - [NameEnum](docs/NameEnum.md)
- - [Nested](docs/Nested.md)
  - [NewsFeedEntry](docs/NewsFeedEntry.md)
  - [NotesImage](docs/NotesImage.md)
  - [NotificationMessage](docs/NotificationMessage.md)
@@ -742,7 +897,6 @@ Class | Method | HTTP request | Description
  - [PaginatedGlobalSettingsList](docs/PaginatedGlobalSettingsList.md)
  - [PaginatedGroupList](docs/PaginatedGroupList.md)
  - [PaginatedIconPackageList](docs/PaginatedIconPackageList.md)
- - [PaginatedKicadCategoryList](docs/PaginatedKicadCategoryList.md)
  - [PaginatedLabelTemplateList](docs/PaginatedLabelTemplateList.md)
  - [PaginatedLocationList](docs/PaginatedLocationList.md)
  - [PaginatedLocationTreeList](docs/PaginatedLocationTreeList.md)
@@ -829,13 +983,13 @@ Class | Method | HTTP request | Description
  - [PatchedExtendedUser](docs/PatchedExtendedUser.md)
  - [PatchedGlobalSettings](docs/PatchedGlobalSettings.md)
  - [PatchedGroup](docs/PatchedGroup.md)
- - [PatchedKicadDetailedCategory](docs/PatchedKicadDetailedCategory.md)
  - [PatchedLabelTemplate](docs/PatchedLabelTemplate.md)
  - [PatchedLocation](docs/PatchedLocation.md)
  - [PatchedMachineConfig](docs/PatchedMachineConfig.md)
  - [PatchedMachineSetting](docs/PatchedMachineSetting.md)
  - [PatchedManufacturerPart](docs/PatchedManufacturerPart.md)
  - [PatchedMeUser](docs/PatchedMeUser.md)
+ - [PatchedMetadata](docs/PatchedMetadata.md)
  - [PatchedNewsFeedEntry](docs/PatchedNewsFeedEntry.md)
  - [PatchedNotificationMessage](docs/PatchedNotificationMessage.md)
  - [PatchedParameter](docs/PatchedParameter.md)
@@ -899,11 +1053,15 @@ Class | Method | HTTP request | Description
  - [PurchaseOrderLineItem](docs/PurchaseOrderLineItem.md)
  - [PurchaseOrderLineItemReceive](docs/PurchaseOrderLineItemReceive.md)
  - [PurchaseOrderReceive](docs/PurchaseOrderReceive.md)
+ - [ReAuthenticatedBy2Fa](docs/ReAuthenticatedBy2Fa.md)
+ - [ReauthenticatedByPassword](docs/ReauthenticatedByPassword.md)
  - [ReferenceStatusEnum](docs/ReferenceStatusEnum.md)
  - [ReportAsset](docs/ReportAsset.md)
  - [ReportPrint](docs/ReportPrint.md)
  - [ReportSnippet](docs/ReportSnippet.md)
  - [ReportTemplate](docs/ReportTemplate.md)
+ - [RequestLoginCodeEmail](docs/RequestLoginCodeEmail.md)
+ - [RequestLoginCodePhone](docs/RequestLoginCodePhone.md)
  - [ReturnOrder](docs/ReturnOrder.md)
  - [ReturnOrderExtraLine](docs/ReturnOrderExtraLine.md)
  - [ReturnOrderLineItem](docs/ReturnOrderLineItem.md)
@@ -952,6 +1110,7 @@ Class | Method | HTTP request | Description
  - [TaskOverview](docs/TaskOverview.md)
  - [TemplateModelTypeEnum](docs/TemplateModelTypeEnum.md)
  - [TestEmail](docs/TestEmail.md)
+ - [UnauthorizedStatus](docs/UnauthorizedStatus.md)
  - [UninstallStockItem](docs/UninstallStockItem.md)
  - [Unit](docs/Unit.md)
  - [User](docs/User.md)

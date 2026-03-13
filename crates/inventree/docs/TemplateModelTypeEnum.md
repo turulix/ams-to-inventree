@@ -4,6 +4,7 @@
 
 | Name | Value |
 |---- | -----|
+| Part | part |
 | Build | build |
 | Buildline | buildline |
 | Company | company |
@@ -11,7 +12,6 @@
 | Salesorder | salesorder |
 | Salesordershipment | salesordershipment |
 | Returnorder | returnorder |
-| Part | part |
 | Stockitem | stockitem |
 | Stocklocation | stocklocation |
 

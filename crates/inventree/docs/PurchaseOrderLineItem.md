@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **quantity** | **f64** |  | 
 **reference** | Option<**String**> | Line item reference | [optional]
 **target_date** | Option<[**String**](String.md)> |  | [optional]
+**order_detail** | Option<[**models::PurchaseOrder**](PurchaseOrder.md)> |  | [optional][readonly]
 **project_code_label** | Option<**String**> |  | [optional][readonly]
 **project_code_detail** | Option<[**models::ProjectCode**](ProjectCode.md)> |  | [optional][readonly]
 **part** | Option<**i32**> |  | 
@@ -19,7 +20,7 @@ Name | Type | Description | Notes
 **overdue** | Option<**bool**> |  | [optional][readonly]
 **received** | **f64** |  | [readonly][default to 0.0]
 **purchase_price** | Option<**String**> |  | [optional]
-**purchase_price_currency** | Option<**String**> | Purchase price currency | [optional]
+**purchase_price_currency** | Option<**String**> | Purchase price currency  * `AUD` - AUD - Australian Dollar * `CAD` - CAD - Canadian Dollar * `CNY` - CNY - Chinese Yuan * `EUR` - EUR - Euro * `GBP` - GBP - British Pound * `JPY` - JPY - Japanese Yen * `NZD` - NZD - New Zealand Dollar * `USD` - USD - US Dollar  Other valid currencies may be found in the 'CURRENCY_CODES' global setting. | [optional]
 **auto_pricing** | Option<**bool**> | Automatically calculate purchase price based on supplier part data | [optional][default to true]
 **destination** | Option<**i32**> | Destination for received items | [optional]
 **total_price** | **f64** |  | [readonly]
@@ -31,6 +32,8 @@ Name | Type | Description | Notes
 **internal_part_name** | **String** |  | [readonly]
 **build_order_detail** | Option<[**models::Build**](Build.md)> |  | [optional][readonly]
 **destination_detail** | Option<[**models::LocationBrief**](LocationBrief.md)> |  | [optional][readonly]
+**part_detail** | Option<[**models::PartBrief**](PartBrief.md)> |  | [optional][readonly]
+**supplier_part_detail** | Option<[**models::SupplierPart**](SupplierPart.md)> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **overdue** | Option<**bool**> |  | [optional][readonly]
 **received** | Option<**f64**> |  | [optional][readonly][default to 0.0]
 **purchase_price** | Option<**String**> |  | [optional]
-**purchase_price_currency** | Option<**String**> | Purchase price currency | [optional]
+**purchase_price_currency** | Option<**String**> | Purchase price currency  * `AUD` - AUD - Australian Dollar * `CAD` - CAD - Canadian Dollar * `CNY` - CNY - Chinese Yuan * `EUR` - EUR - Euro * `GBP` - GBP - British Pound * `JPY` - JPY - Japanese Yen * `NZD` - NZD - New Zealand Dollar * `USD` - USD - US Dollar  Other valid currencies may be found in the 'CURRENCY_CODES' global setting. | [optional]
 **auto_pricing** | Option<**bool**> | Automatically calculate purchase price based on supplier part data | [optional][default to true]
 **destination** | Option<**i32**> | Destination for received items | [optional]
 **total_price** | Option<**f64**> |  | [optional][readonly]

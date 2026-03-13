@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **barcode_hash** | **String** | Unique hash of barcode data | [readonly]
 **category_default_location** | Option<**i32**> |  | [optional][readonly]
 **default_location** | Option<**i32**> | Where is this item normally stored? | [optional]
-**default_expiry** | Option<**u32**> | Expiry time (in days) for stock items of this part | [optional]
+**default_expiry** | Option<**u64**> | Expiry time (in days) for stock items of this part | [optional]
 **name** | **String** | Part name | 
 **revision** | Option<**String**> |  | [optional][default to ]
 **full_name** | **String** | Format a 'full name' for this Part based on the format PART_NAME_FORMAT defined in InvenTree settings. | [readonly]
@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **trackable** | Option<**bool**> | Does this part have tracking for unique items? | [optional]
 **r#virtual** | Option<**bool**> | Is this a virtual part, such as a software product or license? | [optional]
 **units** | Option<**String**> | Units of measure for this part | [optional]
+**pricing_min** | Option<**String**> |  | [optional][readonly]
 **pricing_max** | Option<**String**> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -2,8 +2,12 @@
 
 $TargetDir = "crates/inventree"
 
+if (Test-Path "$TargetDir/src") {
+    Remove-Item -Path "$TargetDir/src" -Recurse -Force
+}
+
 docker run --rm -v "$($PWD.Path):/local" openapitools/openapi-generator-cli generate `
-    -i https://inv.turulix.de/api/schema/ `
+    -i https://raw.githubusercontent.com/inventree/schema/refs/heads/main/export/453/api.yaml `
     -g rust `
     --additional-properties=packageName=inventree `
     --additional-properties=library=reqwest-trait `

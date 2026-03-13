@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **address** | Option<**i32**> | Company address for this order | [optional]
 **status** | Option<**i32**> |  | [optional][readonly]
 **status_text** | Option<**String**> |  | [optional][readonly]
-**status_custom_key** | Option<**i32**> | Additional status information for this item | [optional][readonly]
+**status_custom_key** | Option<**i32**> | Additional status information for this item  * `10` - Pending * `20` - In Progress * `25` - On Hold * `30` - Complete * `40` - Cancelled  Additional custom status keys may be retrieved from the corresponding 'status_retrieve' call. | [optional][readonly]
 **notes** | Option<**String**> | Markdown notes (optional) | [optional]
 **barcode_hash** | Option<**String**> |  | [optional][readonly]
 **overdue** | Option<**bool**> |  | [optional][readonly]
@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **customer** | Option<**i32**> | Company from which items are being returned | [optional]
 **customer_detail** | Option<[**models::CompanyBrief**](CompanyBrief.md)> |  | [optional][readonly]
 **customer_reference** | Option<**String**> | Customer order reference code | [optional]
-**order_currency** | Option<**String**> | Currency for this order (leave blank to use company default) | [optional]
+**order_currency** | Option<**String**> | Currency for this order (leave blank to use company default)  * `` - --------- * `AUD` - AUD - Australian Dollar * `CAD` - CAD - Canadian Dollar * `CNY` - CNY - Chinese Yuan * `EUR` - EUR - Euro * `GBP` - GBP - British Pound * `JPY` - JPY - Japanese Yen * `NZD` - NZD - New Zealand Dollar * `USD` - USD - US Dollar  Other valid currencies may be found in the 'CURRENCY_CODES' global setting. | [optional]
 **total_price** | Option<**String**> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

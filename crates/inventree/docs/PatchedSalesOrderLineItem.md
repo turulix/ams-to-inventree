@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **part** | Option<**i32**> | Part | [optional]
 **part_detail** | Option<[**models::PartBrief**](PartBrief.md)> |  | [optional][readonly]
 **sale_price** | Option<**String**> |  | [optional]
-**sale_price_currency** | Option<**String**> | Sale price currency | [optional]
+**sale_price_currency** | Option<**String**> | Sale price currency  * `AUD` - AUD - Australian Dollar * `CAD` - CAD - Canadian Dollar * `CNY` - CNY - Chinese Yuan * `EUR` - EUR - Euro * `GBP` - GBP - British Pound * `JPY` - JPY - Japanese Yen * `NZD` - NZD - New Zealand Dollar * `USD` - USD - US Dollar  Other valid currencies may be found in the 'CURRENCY_CODES' global setting. | [optional]
 **shipped** | Option<**f64**> |  | [optional][readonly]
 **available_stock** | Option<**f64**> |  | [optional][readonly]
 **available_variant_stock** | Option<**f64**> |  | [optional][readonly]

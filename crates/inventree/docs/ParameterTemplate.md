@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **name** | **String** | Parameter Name | 
 **units** | Option<**String**> | Physical units for this parameter | [optional]
 **description** | Option<**String**> | Parameter description | [optional]
-**model_type** | Option<**ModelType**> |  (enum: build.build, company.company, company.supplierpart, company.manufacturerpart, order.purchaseorder, order.salesorder, order.returnorder, part.part, stock.stocklocation, , ) | [optional][default to Empty]
+**model_type** | Option<**ModelType**> |  (enum: part.part, company.manufacturerpart, build.build, company.company, company.supplierpart, order.purchaseorder, order.salesorder, order.returnorder, stock.stocklocation, , ) | [optional][default to Empty]
 **checkbox** | Option<**bool**> | Is this parameter a checkbox? | [optional]
 **choices** | Option<**String**> | Valid choices for this parameter (comma-separated) | [optional]
 **selectionlist** | Option<**i32**> | Selection list for this parameter | [optional]

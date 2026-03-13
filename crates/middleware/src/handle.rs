@@ -28,15 +28,13 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
             let numeric_tray_weight = f32::from_str(&tray.tray_weight)?;
             let expected_remaining_weight = numeric_tray_weight * (tray.remain as f32 / 100.0);
 
-            let item = inv_api
-                .stock_api()
-                .stock_list(
-                    StockListParams::builder()
-                        .batch(tray.tag_uid.clone())
-                        .limit(10)
-                        .build_struct(),
-                )
-                .await?;
+            let data = StockListParams::builder()
+                .batch(tray.tag_uid.clone())
+                .part_detail(true)
+                .limit(10)
+                .build_struct();
+
+            let item = inv_api.stock_api().stock_list(data).await?;
 
             if item.results.is_empty() {
                 //TODO: Automatically create new spool.

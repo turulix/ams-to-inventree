@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **start_date** | Option<[**String**](String.md)> | Scheduled start date for this build order | [optional]
 **status** | Option<[**models::BuildStatusEnum**](BuildStatusEnum.md)> | Build status code  * `10` - Pending * `20` - Production * `25` - On Hold * `30` - Cancelled * `40` - Complete | [optional][readonly]
 **status_text** | Option<**String**> |  | [optional][readonly]
-**status_custom_key** | Option<**i32**> | Additional status information for this item | [optional][readonly]
+**status_custom_key** | Option<**i32**> | Additional status information for this item  * `10` - Pending * `20` - Production * `25` - On Hold * `30` - Cancelled * `40` - Complete  Additional custom status keys may be retrieved from the corresponding 'status_retrieve' call. | [optional][readonly]
 **target_date** | Option<[**String**](String.md)> | Target date for build completion. Build will be overdue after this date. | [optional]
 **take_from** | Option<**i32**> | Select location to take stock from for this build (leave blank to take from any stock location) | [optional]
 **notes** | Option<**String**> | Markdown notes (optional) | [optional]
@@ -37,7 +37,7 @@ Name | Type | Description | Notes
 **responsible** | Option<**i32**> | User or group responsible for this build order | [optional]
 **responsible_detail** | Option<[**models::Owner**](Owner.md)> |  | [optional][readonly]
 **parameters** | Option<[**Vec<models::Parameter>**](Parameter.md)> |  | [optional][readonly]
-**priority** | Option<**u32**> | Priority of this build order | [optional]
+**priority** | Option<**u64**> | Priority of this build order | [optional]
 **level** | Option<**i32**> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

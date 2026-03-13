@@ -16,7 +16,7 @@ pub enum Error<T> {
     ResponseError(ResponseContent<T>),
 }
 
-impl<T> fmt::Display for Error<T> {
+impl <T> fmt::Display for Error<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let (module, e) = match self {
             Error::Reqwest(e) => ("reqwest", e.to_string()),
@@ -28,7 +28,7 @@ impl<T> fmt::Display for Error<T> {
     }
 }
 
-impl<T: fmt::Debug> error::Error for Error<T> {
+impl <T: fmt::Debug> error::Error for Error<T> {
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         Some(match self {
             Error::Reqwest(e) => e,
@@ -39,19 +39,19 @@ impl<T: fmt::Debug> error::Error for Error<T> {
     }
 }
 
-impl<T> From<reqwest::Error> for Error<T> {
+impl <T> From<reqwest::Error> for Error<T> {
     fn from(e: reqwest::Error) -> Self {
         Error::Reqwest(e)
     }
 }
 
-impl<T> From<serde_json::Error> for Error<T> {
+impl <T> From<serde_json::Error> for Error<T> {
     fn from(e: serde_json::Error) -> Self {
         Error::Serde(e)
     }
 }
 
-impl<T> From<std::io::Error> for Error<T> {
+impl <T> From<std::io::Error> for Error<T> {
     fn from(e: std::io::Error) -> Self {
         Error::Io(e)
     }
@@ -78,10 +78,8 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
                             value,
                         ));
                     }
-                }
-                serde_json::Value::String(s) => {
-                    params.push((format!("{}[{}]", prefix, key), s.clone()))
-                }
+                },
+                serde_json::Value::String(s) => params.push((format!("{}[{}]", prefix, key), s.clone())),
                 _ => params.push((format!("{}[{}]", prefix, key), value.to_string())),
             }
         }
@@ -98,7 +96,7 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
 enum ContentType {
     Json,
     Text,
-    Unsupported(String),
+    Unsupported(String)
 }
 
 impl From<&str> for ContentType {
@@ -113,14 +111,29 @@ impl From<&str> for ContentType {
     }
 }
 
+pub mod account2_fa_api;
+pub mod account_email_api;
+pub mod account_password_api;
+pub mod account_phone_api;
+pub mod account_providers_api;
+pub mod account_web_authn_api;
 pub mod action_api;
 pub mod admin_api;
 pub mod attachment_api;
+pub mod authentication2_fa_api;
+pub mod authentication_account_api;
+pub mod authentication_current_session_api;
+pub mod authentication_login_by_code_api;
+pub mod authentication_password_reset_api;
+pub mod authentication_providers_api;
+pub mod authentication_web_authn_login_api;
+pub mod authentication_web_authn_signup_api;
 pub mod background_task_api;
 pub mod barcode_api;
 pub mod bom_api;
 pub mod build_api;
 pub mod company_api;
+pub mod configuration_api;
 pub mod contenttype_api;
 pub mod currency_api;
 pub mod data_output_api;
@@ -143,17 +156,18 @@ pub mod notifications_api;
 pub mod order_api;
 pub mod parameter_api;
 pub mod part_api;
-pub mod plugin_api;
 pub mod plugins_api;
 pub mod project_code_api;
 pub mod report_api;
 pub mod search_api;
 pub mod selection_api;
+pub mod sessions_api;
 pub mod settings_api;
 pub mod stock_api;
 pub mod supplier_api;
 pub mod system_api;
 pub mod system_internal_api;
+pub mod tokens_api;
 pub mod units_api;
 pub mod user_api;
 pub mod version_api;
@@ -165,14 +179,29 @@ pub mod configuration;
 use std::sync::Arc;
 
 pub trait Api {
+    fn account2_fa_api(&self) -> &dyn account2_fa_api::Account2FaApi;
+    fn account_email_api(&self) -> &dyn account_email_api::AccountEmailApi;
+    fn account_password_api(&self) -> &dyn account_password_api::AccountPasswordApi;
+    fn account_phone_api(&self) -> &dyn account_phone_api::AccountPhoneApi;
+    fn account_providers_api(&self) -> &dyn account_providers_api::AccountProvidersApi;
+    fn account_web_authn_api(&self) -> &dyn account_web_authn_api::AccountWebAuthnApi;
     fn action_api(&self) -> &dyn action_api::ActionApi;
     fn admin_api(&self) -> &dyn admin_api::AdminApi;
     fn attachment_api(&self) -> &dyn attachment_api::AttachmentApi;
+    fn authentication2_fa_api(&self) -> &dyn authentication2_fa_api::Authentication2FaApi;
+    fn authentication_account_api(&self) -> &dyn authentication_account_api::AuthenticationAccountApi;
+    fn authentication_current_session_api(&self) -> &dyn authentication_current_session_api::AuthenticationCurrentSessionApi;
+    fn authentication_login_by_code_api(&self) -> &dyn authentication_login_by_code_api::AuthenticationLoginByCodeApi;
+    fn authentication_password_reset_api(&self) -> &dyn authentication_password_reset_api::AuthenticationPasswordResetApi;
+    fn authentication_providers_api(&self) -> &dyn authentication_providers_api::AuthenticationProvidersApi;
+    fn authentication_web_authn_login_api(&self) -> &dyn authentication_web_authn_login_api::AuthenticationWebAuthnLoginApi;
+    fn authentication_web_authn_signup_api(&self) -> &dyn authentication_web_authn_signup_api::AuthenticationWebAuthnSignupApi;
     fn background_task_api(&self) -> &dyn background_task_api::BackgroundTaskApi;
     fn barcode_api(&self) -> &dyn barcode_api::BarcodeApi;
     fn bom_api(&self) -> &dyn bom_api::BomApi;
     fn build_api(&self) -> &dyn build_api::BuildApi;
     fn company_api(&self) -> &dyn company_api::CompanyApi;
+    fn configuration_api(&self) -> &dyn configuration_api::ConfigurationApi;
     fn contenttype_api(&self) -> &dyn contenttype_api::ContenttypeApi;
     fn currency_api(&self) -> &dyn currency_api::CurrencyApi;
     fn data_output_api(&self) -> &dyn data_output_api::DataOutputApi;
@@ -195,17 +224,18 @@ pub trait Api {
     fn order_api(&self) -> &dyn order_api::OrderApi;
     fn parameter_api(&self) -> &dyn parameter_api::ParameterApi;
     fn part_api(&self) -> &dyn part_api::PartApi;
-    fn plugin_api(&self) -> &dyn plugin_api::PluginApi;
     fn plugins_api(&self) -> &dyn plugins_api::PluginsApi;
     fn project_code_api(&self) -> &dyn project_code_api::ProjectCodeApi;
     fn report_api(&self) -> &dyn report_api::ReportApi;
     fn search_api(&self) -> &dyn search_api::SearchApi;
     fn selection_api(&self) -> &dyn selection_api::SelectionApi;
+    fn sessions_api(&self) -> &dyn sessions_api::SessionsApi;
     fn settings_api(&self) -> &dyn settings_api::SettingsApi;
     fn stock_api(&self) -> &dyn stock_api::StockApi;
     fn supplier_api(&self) -> &dyn supplier_api::SupplierApi;
     fn system_api(&self) -> &dyn system_api::SystemApi;
     fn system_internal_api(&self) -> &dyn system_internal_api::SystemInternalApi;
+    fn tokens_api(&self) -> &dyn tokens_api::TokensApi;
     fn units_api(&self) -> &dyn units_api::UnitsApi;
     fn user_api(&self) -> &dyn user_api::UserApi;
     fn version_api(&self) -> &dyn version_api::VersionApi;
@@ -214,14 +244,29 @@ pub trait Api {
 }
 
 pub struct ApiClient {
+    account2_fa_api: Box<dyn account2_fa_api::Account2FaApi>,
+    account_email_api: Box<dyn account_email_api::AccountEmailApi>,
+    account_password_api: Box<dyn account_password_api::AccountPasswordApi>,
+    account_phone_api: Box<dyn account_phone_api::AccountPhoneApi>,
+    account_providers_api: Box<dyn account_providers_api::AccountProvidersApi>,
+    account_web_authn_api: Box<dyn account_web_authn_api::AccountWebAuthnApi>,
     action_api: Box<dyn action_api::ActionApi>,
     admin_api: Box<dyn admin_api::AdminApi>,
     attachment_api: Box<dyn attachment_api::AttachmentApi>,
+    authentication2_fa_api: Box<dyn authentication2_fa_api::Authentication2FaApi>,
+    authentication_account_api: Box<dyn authentication_account_api::AuthenticationAccountApi>,
+    authentication_current_session_api: Box<dyn authentication_current_session_api::AuthenticationCurrentSessionApi>,
+    authentication_login_by_code_api: Box<dyn authentication_login_by_code_api::AuthenticationLoginByCodeApi>,
+    authentication_password_reset_api: Box<dyn authentication_password_reset_api::AuthenticationPasswordResetApi>,
+    authentication_providers_api: Box<dyn authentication_providers_api::AuthenticationProvidersApi>,
+    authentication_web_authn_login_api: Box<dyn authentication_web_authn_login_api::AuthenticationWebAuthnLoginApi>,
+    authentication_web_authn_signup_api: Box<dyn authentication_web_authn_signup_api::AuthenticationWebAuthnSignupApi>,
     background_task_api: Box<dyn background_task_api::BackgroundTaskApi>,
     barcode_api: Box<dyn barcode_api::BarcodeApi>,
     bom_api: Box<dyn bom_api::BomApi>,
     build_api: Box<dyn build_api::BuildApi>,
     company_api: Box<dyn company_api::CompanyApi>,
+    configuration_api: Box<dyn configuration_api::ConfigurationApi>,
     contenttype_api: Box<dyn contenttype_api::ContenttypeApi>,
     currency_api: Box<dyn currency_api::CurrencyApi>,
     data_output_api: Box<dyn data_output_api::DataOutputApi>,
@@ -244,17 +289,18 @@ pub struct ApiClient {
     order_api: Box<dyn order_api::OrderApi>,
     parameter_api: Box<dyn parameter_api::ParameterApi>,
     part_api: Box<dyn part_api::PartApi>,
-    plugin_api: Box<dyn plugin_api::PluginApi>,
     plugins_api: Box<dyn plugins_api::PluginsApi>,
     project_code_api: Box<dyn project_code_api::ProjectCodeApi>,
     report_api: Box<dyn report_api::ReportApi>,
     search_api: Box<dyn search_api::SearchApi>,
     selection_api: Box<dyn selection_api::SelectionApi>,
+    sessions_api: Box<dyn sessions_api::SessionsApi>,
     settings_api: Box<dyn settings_api::SettingsApi>,
     stock_api: Box<dyn stock_api::StockApi>,
     supplier_api: Box<dyn supplier_api::SupplierApi>,
     system_api: Box<dyn system_api::SystemApi>,
     system_internal_api: Box<dyn system_internal_api::SystemInternalApi>,
+    tokens_api: Box<dyn tokens_api::TokensApi>,
     units_api: Box<dyn units_api::UnitsApi>,
     user_api: Box<dyn user_api::UserApi>,
     version_api: Box<dyn version_api::VersionApi>,
@@ -265,30 +311,35 @@ pub struct ApiClient {
 impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
+            account2_fa_api: Box::new(account2_fa_api::Account2FaApiClient::new(configuration.clone())),
+            account_email_api: Box::new(account_email_api::AccountEmailApiClient::new(configuration.clone())),
+            account_password_api: Box::new(account_password_api::AccountPasswordApiClient::new(configuration.clone())),
+            account_phone_api: Box::new(account_phone_api::AccountPhoneApiClient::new(configuration.clone())),
+            account_providers_api: Box::new(account_providers_api::AccountProvidersApiClient::new(configuration.clone())),
+            account_web_authn_api: Box::new(account_web_authn_api::AccountWebAuthnApiClient::new(configuration.clone())),
             action_api: Box::new(action_api::ActionApiClient::new(configuration.clone())),
             admin_api: Box::new(admin_api::AdminApiClient::new(configuration.clone())),
-            attachment_api: Box::new(attachment_api::AttachmentApiClient::new(
-                configuration.clone(),
-            )),
-            background_task_api: Box::new(background_task_api::BackgroundTaskApiClient::new(
-                configuration.clone(),
-            )),
+            attachment_api: Box::new(attachment_api::AttachmentApiClient::new(configuration.clone())),
+            authentication2_fa_api: Box::new(authentication2_fa_api::Authentication2FaApiClient::new(configuration.clone())),
+            authentication_account_api: Box::new(authentication_account_api::AuthenticationAccountApiClient::new(configuration.clone())),
+            authentication_current_session_api: Box::new(authentication_current_session_api::AuthenticationCurrentSessionApiClient::new(configuration.clone())),
+            authentication_login_by_code_api: Box::new(authentication_login_by_code_api::AuthenticationLoginByCodeApiClient::new(configuration.clone())),
+            authentication_password_reset_api: Box::new(authentication_password_reset_api::AuthenticationPasswordResetApiClient::new(configuration.clone())),
+            authentication_providers_api: Box::new(authentication_providers_api::AuthenticationProvidersApiClient::new(configuration.clone())),
+            authentication_web_authn_login_api: Box::new(authentication_web_authn_login_api::AuthenticationWebAuthnLoginApiClient::new(configuration.clone())),
+            authentication_web_authn_signup_api: Box::new(authentication_web_authn_signup_api::AuthenticationWebAuthnSignupApiClient::new(configuration.clone())),
+            background_task_api: Box::new(background_task_api::BackgroundTaskApiClient::new(configuration.clone())),
             barcode_api: Box::new(barcode_api::BarcodeApiClient::new(configuration.clone())),
             bom_api: Box::new(bom_api::BomApiClient::new(configuration.clone())),
             build_api: Box::new(build_api::BuildApiClient::new(configuration.clone())),
             company_api: Box::new(company_api::CompanyApiClient::new(configuration.clone())),
-            contenttype_api: Box::new(contenttype_api::ContenttypeApiClient::new(
-                configuration.clone(),
-            )),
+            configuration_api: Box::new(configuration_api::ConfigurationApiClient::new(configuration.clone())),
+            contenttype_api: Box::new(contenttype_api::ContenttypeApiClient::new(configuration.clone())),
             currency_api: Box::new(currency_api::CurrencyApiClient::new(configuration.clone())),
-            data_output_api: Box::new(data_output_api::DataOutputApiClient::new(
-                configuration.clone(),
-            )),
+            data_output_api: Box::new(data_output_api::DataOutputApiClient::new(configuration.clone())),
             default_api: Box::new(default_api::DefaultApiClient::new(configuration.clone())),
             email_api: Box::new(email_api::EmailApiClient::new(configuration.clone())),
-            error_report_api: Box::new(error_report_api::ErrorReportApiClient::new(
-                configuration.clone(),
-            )),
+            error_report_api: Box::new(error_report_api::ErrorReportApiClient::new(configuration.clone())),
             flags_api: Box::new(flags_api::FlagsApiClient::new(configuration.clone())),
             generate_api: Box::new(generate_api::GenerateApiClient::new(configuration.clone())),
             generic_api: Box::new(generic_api::GenericApiClient::new(configuration.clone())),
@@ -300,46 +351,51 @@ impl ApiClient {
             machine_api: Box::new(machine_api::MachineApiClient::new(configuration.clone())),
             metadata_api: Box::new(metadata_api::MetadataApiClient::new(configuration.clone())),
             news_api: Box::new(news_api::NewsApiClient::new(configuration.clone())),
-            notes_image_upload_api: Box::new(
-                notes_image_upload_api::NotesImageUploadApiClient::new(configuration.clone()),
-            ),
-            notifications_api: Box::new(notifications_api::NotificationsApiClient::new(
-                configuration.clone(),
-            )),
+            notes_image_upload_api: Box::new(notes_image_upload_api::NotesImageUploadApiClient::new(configuration.clone())),
+            notifications_api: Box::new(notifications_api::NotificationsApiClient::new(configuration.clone())),
             order_api: Box::new(order_api::OrderApiClient::new(configuration.clone())),
-            parameter_api: Box::new(parameter_api::ParameterApiClient::new(
-                configuration.clone(),
-            )),
+            parameter_api: Box::new(parameter_api::ParameterApiClient::new(configuration.clone())),
             part_api: Box::new(part_api::PartApiClient::new(configuration.clone())),
-            plugin_api: Box::new(plugin_api::PluginApiClient::new(configuration.clone())),
             plugins_api: Box::new(plugins_api::PluginsApiClient::new(configuration.clone())),
-            project_code_api: Box::new(project_code_api::ProjectCodeApiClient::new(
-                configuration.clone(),
-            )),
+            project_code_api: Box::new(project_code_api::ProjectCodeApiClient::new(configuration.clone())),
             report_api: Box::new(report_api::ReportApiClient::new(configuration.clone())),
             search_api: Box::new(search_api::SearchApiClient::new(configuration.clone())),
-            selection_api: Box::new(selection_api::SelectionApiClient::new(
-                configuration.clone(),
-            )),
+            selection_api: Box::new(selection_api::SelectionApiClient::new(configuration.clone())),
+            sessions_api: Box::new(sessions_api::SessionsApiClient::new(configuration.clone())),
             settings_api: Box::new(settings_api::SettingsApiClient::new(configuration.clone())),
             stock_api: Box::new(stock_api::StockApiClient::new(configuration.clone())),
             supplier_api: Box::new(supplier_api::SupplierApiClient::new(configuration.clone())),
             system_api: Box::new(system_api::SystemApiClient::new(configuration.clone())),
-            system_internal_api: Box::new(system_internal_api::SystemInternalApiClient::new(
-                configuration.clone(),
-            )),
+            system_internal_api: Box::new(system_internal_api::SystemInternalApiClient::new(configuration.clone())),
+            tokens_api: Box::new(tokens_api::TokensApiClient::new(configuration.clone())),
             units_api: Box::new(units_api::UnitsApiClient::new(configuration.clone())),
             user_api: Box::new(user_api::UserApiClient::new(configuration.clone())),
             version_api: Box::new(version_api::VersionApiClient::new(configuration.clone())),
-            version_text_api: Box::new(version_text_api::VersionTextApiClient::new(
-                configuration.clone(),
-            )),
+            version_text_api: Box::new(version_text_api::VersionTextApiClient::new(configuration.clone())),
             webhook_api: Box::new(webhook_api::WebhookApiClient::new(configuration.clone())),
         }
     }
 }
 
 impl Api for ApiClient {
+    fn account2_fa_api(&self) -> &dyn account2_fa_api::Account2FaApi {
+        self.account2_fa_api.as_ref()
+    }
+    fn account_email_api(&self) -> &dyn account_email_api::AccountEmailApi {
+        self.account_email_api.as_ref()
+    }
+    fn account_password_api(&self) -> &dyn account_password_api::AccountPasswordApi {
+        self.account_password_api.as_ref()
+    }
+    fn account_phone_api(&self) -> &dyn account_phone_api::AccountPhoneApi {
+        self.account_phone_api.as_ref()
+    }
+    fn account_providers_api(&self) -> &dyn account_providers_api::AccountProvidersApi {
+        self.account_providers_api.as_ref()
+    }
+    fn account_web_authn_api(&self) -> &dyn account_web_authn_api::AccountWebAuthnApi {
+        self.account_web_authn_api.as_ref()
+    }
     fn action_api(&self) -> &dyn action_api::ActionApi {
         self.action_api.as_ref()
     }
@@ -348,6 +404,30 @@ impl Api for ApiClient {
     }
     fn attachment_api(&self) -> &dyn attachment_api::AttachmentApi {
         self.attachment_api.as_ref()
+    }
+    fn authentication2_fa_api(&self) -> &dyn authentication2_fa_api::Authentication2FaApi {
+        self.authentication2_fa_api.as_ref()
+    }
+    fn authentication_account_api(&self) -> &dyn authentication_account_api::AuthenticationAccountApi {
+        self.authentication_account_api.as_ref()
+    }
+    fn authentication_current_session_api(&self) -> &dyn authentication_current_session_api::AuthenticationCurrentSessionApi {
+        self.authentication_current_session_api.as_ref()
+    }
+    fn authentication_login_by_code_api(&self) -> &dyn authentication_login_by_code_api::AuthenticationLoginByCodeApi {
+        self.authentication_login_by_code_api.as_ref()
+    }
+    fn authentication_password_reset_api(&self) -> &dyn authentication_password_reset_api::AuthenticationPasswordResetApi {
+        self.authentication_password_reset_api.as_ref()
+    }
+    fn authentication_providers_api(&self) -> &dyn authentication_providers_api::AuthenticationProvidersApi {
+        self.authentication_providers_api.as_ref()
+    }
+    fn authentication_web_authn_login_api(&self) -> &dyn authentication_web_authn_login_api::AuthenticationWebAuthnLoginApi {
+        self.authentication_web_authn_login_api.as_ref()
+    }
+    fn authentication_web_authn_signup_api(&self) -> &dyn authentication_web_authn_signup_api::AuthenticationWebAuthnSignupApi {
+        self.authentication_web_authn_signup_api.as_ref()
     }
     fn background_task_api(&self) -> &dyn background_task_api::BackgroundTaskApi {
         self.background_task_api.as_ref()
@@ -363,6 +443,9 @@ impl Api for ApiClient {
     }
     fn company_api(&self) -> &dyn company_api::CompanyApi {
         self.company_api.as_ref()
+    }
+    fn configuration_api(&self) -> &dyn configuration_api::ConfigurationApi {
+        self.configuration_api.as_ref()
     }
     fn contenttype_api(&self) -> &dyn contenttype_api::ContenttypeApi {
         self.contenttype_api.as_ref()
@@ -430,9 +513,6 @@ impl Api for ApiClient {
     fn part_api(&self) -> &dyn part_api::PartApi {
         self.part_api.as_ref()
     }
-    fn plugin_api(&self) -> &dyn plugin_api::PluginApi {
-        self.plugin_api.as_ref()
-    }
     fn plugins_api(&self) -> &dyn plugins_api::PluginsApi {
         self.plugins_api.as_ref()
     }
@@ -448,6 +528,9 @@ impl Api for ApiClient {
     fn selection_api(&self) -> &dyn selection_api::SelectionApi {
         self.selection_api.as_ref()
     }
+    fn sessions_api(&self) -> &dyn sessions_api::SessionsApi {
+        self.sessions_api.as_ref()
+    }
     fn settings_api(&self) -> &dyn settings_api::SettingsApi {
         self.settings_api.as_ref()
     }
@@ -462,6 +545,9 @@ impl Api for ApiClient {
     }
     fn system_internal_api(&self) -> &dyn system_internal_api::SystemInternalApi {
         self.system_internal_api.as_ref()
+    }
+    fn tokens_api(&self) -> &dyn tokens_api::TokensApi {
+        self.tokens_api.as_ref()
     }
     fn units_api(&self) -> &dyn units_api::UnitsApi {
         self.units_api.as_ref()
@@ -479,3 +565,5 @@ impl Api for ApiClient {
         self.webhook_api.as_ref()
     }
 }
+
+

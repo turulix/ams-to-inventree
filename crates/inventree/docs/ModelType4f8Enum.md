@@ -4,14 +4,14 @@
 
 | Name | Value |
 |---- | -----|
+| PartPart | part.part |
+| CompanyManufacturerpart | company.manufacturerpart |
 | BuildBuild | build.build |
 | CompanyCompany | company.company |
 | CompanySupplierpart | company.supplierpart |
-| CompanyManufacturerpart | company.manufacturerpart |
 | OrderPurchaseorder | order.purchaseorder |
 | OrderSalesorder | order.salesorder |
 | OrderReturnorder | order.returnorder |
-| PartPart | part.part |
 | StockStocklocation | stock.stocklocation |
 
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **pk** | **i32** |  | [readonly]
 **template** | **i32** | Parameter template | 
 **model_type** | Option<[**models::ModelType4f8Enum**](ModelType4f8Enum.md)> |  | [optional][default to ]
-**model_id** | **u32** | ID of the target model for this parameter | 
+**model_id** | **u64** | ID of the target model for this parameter | 
 **data** | **String** | Parameter Value | 
 **data_numeric** | Option<**f64**> |  | [optional]
 **note** | Option<**String**> | Optional note field | [optional]

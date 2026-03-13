@@ -8,12 +8,15 @@ Name | Type | Description | Notes
 **assembly** | Option<**bool**> | Can this part be built from other parts? | [optional]
 **barcode_hash** | **String** | Unique hash of barcode data | [readonly]
 **category** | Option<**i32**> |  | [optional]
+**category_detail** | Option<[**models::Category**](Category.md)> |  | [optional][readonly]
+**category_path** | Option<**Vec<std::collections::HashMap<String, serde_json::Value>>**> |  | [optional][readonly]
 **category_name** | **String** |  | [readonly]
 **component** | Option<**bool**> | Can this part be used to build other parts? | [optional]
 **creation_date** | Option<[**String**](String.md)> |  | [optional][readonly]
 **creation_user** | Option<**i32**> |  | [optional]
-**default_expiry** | Option<**u32**> | Expiry time (in days) for stock items of this part | [optional]
+**default_expiry** | Option<**u64**> | Expiry time (in days) for stock items of this part | [optional]
 **default_location** | Option<**i32**> | Where is this item normally stored? | [optional]
+**default_location_detail** | Option<[**models::DefaultLocation**](DefaultLocation.md)> |  | [optional][readonly]
 **default_supplier** | Option<**i32**> | Default supplier part | [optional]
 **description** | Option<**String**> | Part description (optional) | [optional]
 **full_name** | **String** | Format a 'full name' for this Part based on the format PART_NAME_FORMAT defined in InvenTree settings. | [readonly]
@@ -27,6 +30,8 @@ Name | Type | Description | Notes
 **locked** | Option<**bool**> | Locked parts cannot be edited | [optional]
 **minimum_stock** | Option<**f64**> |  | [optional][default to 0.0]
 **name** | **String** | Part name | 
+**notes** | Option<**String**> | Markdown notes (optional) | [optional]
+**parameters** | Option<[**Vec<models::Parameter>**](Parameter.md)> |  | [optional][readonly]
 **pk** | **i32** |  | [readonly]
 **purchaseable** | Option<**bool**> | Can this part be purchased from external suppliers? | [optional]
 **revision** | Option<**String**> |  | [optional][default to ]
@@ -44,6 +49,7 @@ Name | Type | Description | Notes
 **pricing_max** | Option<**String**> |  | [optional][readonly]
 **pricing_updated** | Option<**String**> |  | [optional][readonly]
 **responsible** | Option<**i32**> |  | [optional]
+**price_breaks** | Option<[**Vec<models::PartSalePrice>**](PartSalePrice.md)> |  | [optional][readonly]
 **allocated_to_build_orders** | Option<**f64**> |  | [optional][readonly]
 **allocated_to_sales_orders** | Option<**f64**> |  | [optional][readonly]
 **building** | Option<**f64**> | Quantity of this part currently being in production | [optional][readonly]
@@ -62,6 +68,7 @@ Name | Type | Description | Notes
 **initial_stock** | Option<[**models::InitialStock**](InitialStock.md)> | Create Part with initial stock quantity | [optional]
 **initial_supplier** | Option<[**models::InitialSupplier**](InitialSupplier.md)> | Add initial supplier information for this part | [optional]
 **copy_category_parameters** | Option<**bool**> | Copy parameter templates from selected part category | [optional][default to true]
+**tags** | Option<**Vec<String>**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

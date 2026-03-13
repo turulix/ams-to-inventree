@@ -14,8 +14,10 @@ Name | Type | Description | Notes
 **started_datetime** | Option<**String**> | The timestamp of the test start | [optional]
 **finished_datetime** | Option<**String**> | The timestamp of the test finish | [optional]
 **user** | Option<**i32**> |  | [optional][readonly]
+**user_detail** | Option<[**models::User**](User.md)> |  | [optional][readonly]
 **date** | **String** |  | [readonly]
 **template** | Option<**i32**> | Template | [optional]
+**template_detail** | Option<[**models::PartTestTemplate**](PartTestTemplate.md)> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

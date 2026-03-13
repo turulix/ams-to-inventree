@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **link** | Option<**String**> | Link to external page | [optional]
 **notes** | Option<**String**> | Markdown notes (optional) | [optional]
 **checked_by_detail** | Option<[**models::User**](User.md)> |  | [optional][readonly]
+**customer_detail** | Option<[**models::CompanyBrief**](CompanyBrief.md)> |  | [optional][readonly]
+**order_detail** | Option<[**models::SalesOrder**](SalesOrder.md)> |  | [optional][readonly]
 **shipment_address_detail** | Option<[**models::AddressBrief**](AddressBrief.md)> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

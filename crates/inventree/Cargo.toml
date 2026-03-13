@@ -15,7 +15,7 @@ url = "^2.5"
 uuid = { version = "^1.8", features = ["serde", "v4"] }
 async-trait = "^0.1"
 reqwest = { version = "^0.13", default-features = false, features = ["json", "multipart", "stream", "query", "form"] }
-bon = { version = "3.9.0", optional = true }
+bon = { version = "2.3", optional = true }
 [features]
 default = ["rustls"]
 native-tls = ["reqwest/native-tls"]

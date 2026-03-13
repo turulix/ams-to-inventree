@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pk** | **i32** |  | [readonly]
-**owner_id** | Option<**u32**> |  | [optional]
+**owner_id** | Option<**u64**> |  | [optional]
 **owner_model** | **String** |  | [readonly]
 **name** | **String** |  | [readonly]
 **label** | **String** |  | [readonly]

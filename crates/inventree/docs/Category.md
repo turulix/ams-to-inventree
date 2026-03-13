@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **part_count** | Option<**i32**> |  | [optional][readonly]
 **subcategories** | Option<**i32**> |  | [optional][readonly]
 **pathstring** | **String** | Path | [readonly]
+**path** | Option<**Vec<std::collections::HashMap<String, serde_json::Value>>**> |  | [optional][readonly]
 **starred** | **bool** | Return True if the category is directly \"starred\" by the current user. | [readonly]
 **structural** | Option<**bool**> | Parts may not be directly assigned to a structural category, but may be assigned to child categories. | [optional]
 **icon** | Option<**String**> | Icon (optional) | [optional]

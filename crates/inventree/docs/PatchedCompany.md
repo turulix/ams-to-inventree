@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **website** | Option<**String**> | Company website URL | [optional]
 **phone** | Option<**String**> | Contact phone number | [optional]
 **email** | Option<**String**> |  | [optional][default to ]
-**currency** | Option<**String**> | Default currency used for this supplier | [optional]
+**currency** | Option<**String**> | Default currency used for this supplier  * `AUD` - AUD - Australian Dollar * `CAD` - CAD - Canadian Dollar * `CNY` - CNY - Chinese Yuan * `EUR` - EUR - Euro * `GBP` - GBP - British Pound * `JPY` - JPY - Japanese Yen * `NZD` - NZD - New Zealand Dollar * `USD` - USD - US Dollar  Other valid currencies may be found in the 'CURRENCY_CODES' global setting. | [optional]
 **contact** | Option<**String**> | Point of contact | [optional]
 **link** | Option<**String**> | Link to external company information | [optional]
 **image** | Option<**String**> |  | [optional]

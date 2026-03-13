@@ -1,6 +1,6 @@
 # \LabelApi
 
-All URIs are relative to *https://inv.turulix.de*
+All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -119,7 +119,7 @@ Name | Type | Description  | Required | Notes
 **limit** | **i32** | Number of results to return per page. | [required] |
 **enabled** | Option<**bool**> |  |  |
 **items** | Option<**String**> | Items |  |
-**model_type** | Option<**String**> | Model Type  * `build` - Build Order * `buildline` - Build Order Line Item * `company` - Company * `purchaseorder` - Purchase Order * `salesorder` - Sales Order * `salesordershipment` - Sales Order Shipment * `returnorder` - Return Order * `part` - Part * `stockitem` - Stock Item * `stocklocation` - Stock Location |  |
+**model_type** | Option<**String**> | Model Type  * `part` - Part * `build` - Build Order * `buildline` - Build Order Line Item * `company` - Company * `purchaseorder` - Purchase Order * `salesorder` - Sales Order * `salesordershipment` - Sales Order Shipment * `returnorder` - Return Order * `stockitem` - Stock Item * `stocklocation` - Stock Location |  |
 **offset** | Option<**i32**> | The initial index from which to return the results. |  |
 **search** | Option<**String**> | A search term. Searched fields: description, name. |  |
 

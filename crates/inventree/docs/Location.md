@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **description** | Option<**String**> | Description (optional) | [optional]
 **parent** | Option<**i32**> | Parent stock location | [optional]
 **pathstring** | **String** | Path | [readonly]
+**path** | Option<**Vec<std::collections::HashMap<String, serde_json::Value>>**> |  | [optional][readonly]
 **items** | **i32** |  | [readonly]
 **sublocations** | **i32** |  | [readonly]
 **owner** | Option<**i32**> | Select Owner | [optional]
@@ -20,6 +21,8 @@ Name | Type | Description | Notes
 **external** | Option<**bool**> | This is an external stock location | [optional]
 **location_type** | Option<**i32**> | Stock location type of this location | [optional]
 **location_type_detail** | Option<[**models::StockLocationType**](StockLocationType.md)> |  | [optional][readonly]
+**tags** | Option<**Vec<String>**> |  | [optional]
+**parameters** | Option<[**Vec<models::Parameter>**](Parameter.md)> |  | [optional][readonly]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

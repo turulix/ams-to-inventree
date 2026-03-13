@@ -1,6 +1,6 @@
 # \BomApi
 
-All URIs are relative to *https://inv.turulix.de*
+All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

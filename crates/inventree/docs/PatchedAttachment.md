@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **user_detail** | Option<[**models::User**](User.md)> |  | [optional][readonly]
 **file_size** | Option<**i32**> | File size in bytes | [optional][readonly]
 **model_type** | Option<[**models::AttachmentModelTypeEnum**](AttachmentModelTypeEnum.md)> |  | [optional]
-**model_id** | Option<**u32**> |  | [optional]
+**model_id** | Option<**u64**> |  | [optional]
 **tags** | Option<**Vec<String>**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
