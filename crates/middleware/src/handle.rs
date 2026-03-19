@@ -1,9 +1,9 @@
 use crate::message::{AmsMessage, AmsTray};
 use inventree::apis::configuration::{ApiKey, Configuration};
-use inventree::apis::stock_api::{StockListParams, StockRemoveCreateParams};
-use inventree::apis::{Api, ApiClient};
-use inventree::models::{StockAdjustmentItem, StockRemove};
-use log::{debug, info, warn};
+use inventree::apis::stock_api::{StockListError, StockListParams, StockRemoveCreateParams};
+use inventree::apis::{Api, ApiClient, Error};
+use inventree::models::{PaginatedStockItemList, StockAdjustmentItem, StockRemove};
+use log::{debug, error, info, warn};
 use settings::SETTINGS;
 use std::str::FromStr;
 use std::sync::Arc;
@@ -34,7 +34,16 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
                 .limit(10)
                 .build_struct();
 
-            let item = inv_api.stock_api().stock_list(data).await?;
+            let item = match inv_api.stock_api().stock_list(data).await {
+                Ok(x) => x,
+                Err(e) => {
+                    return Err(anyhow::anyhow!(
+                        "Failed to query Inventree API for batch code: {}, error: {:?}",
+                        &tray.tag_uid,
+                        e
+                    ));
+                }
+            };
 
             if item.results.is_empty() {
                 //TODO: Automatically create new spool.
@@ -45,8 +54,9 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
                 );
 
                 info!(
-                    "Found Spool without matching Part: {}",
-                    get_filament_match_key(tray)
+                    "Found Spool without matching Part: {}, TAG: {}",
+                    get_filament_match_key(tray),
+                    &tray.tag_uid
                 );
 
                 continue;

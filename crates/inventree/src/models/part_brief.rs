@@ -117,14 +117,14 @@ pub struct PartBrief {
         with = "::serde_with::rust::double_option",
         skip_serializing_if = "Option::is_none"
     )]
-    pub pricing_min: Option<Option<String>>,
+    pub pricing_min: Option<Option<f32>>,
     #[serde(
         rename = "pricing_max",
         default,
         with = "::serde_with::rust::double_option",
         skip_serializing_if = "Option::is_none"
     )]
-    pub pricing_max: Option<Option<String>>,
+    pub pricing_max: Option<Option<f32>>,
 }
 
 impl PartBrief {

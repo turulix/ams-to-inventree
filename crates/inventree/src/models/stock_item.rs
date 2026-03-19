@@ -210,7 +210,7 @@ pub struct StockItem {
         with = "::serde_with::rust::double_option",
         skip_serializing_if = "Option::is_none"
     )]
-    pub purchase_price: Option<Option<String>>,
+    pub purchase_price: Option<Option<f32>>,
     /// Purchase currency of this stock item  * `AUD` - AUD - Australian Dollar * `CAD` - CAD - Canadian Dollar * `CNY` - CNY - Chinese Yuan * `EUR` - EUR - Euro * `GBP` - GBP - British Pound * `JPY` - JPY - Japanese Yen * `NZD` - NZD - New Zealand Dollar * `USD` - USD - US Dollar  Other valid currencies may be found in the 'CURRENCY_CODES' global setting.
     #[serde(
         rename = "purchase_price_currency",
