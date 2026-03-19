@@ -1,9 +1,9 @@
 use crate::message::{AmsMessage, AmsTray};
 use inventree::apis::configuration::{ApiKey, Configuration};
-use inventree::apis::stock_api::{StockListError, StockListParams, StockRemoveCreateParams};
-use inventree::apis::{Api, ApiClient, Error};
-use inventree::models::{PaginatedStockItemList, StockAdjustmentItem, StockRemove};
-use log::{debug, error, info, warn};
+use inventree::apis::stock_api::{StockListParams, StockRemoveCreateParams};
+use inventree::apis::{Api, ApiClient};
+use inventree::models::{StockAdjustmentItem, StockRemove};
+use log::{debug, info, warn};
 use settings::SETTINGS;
 use std::str::FromStr;
 use std::sync::Arc;
