@@ -2,7 +2,7 @@ use serde::{Deserialize, Deserializer};
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct PrinterMessage {
-    pub print: PrintUpdate,
+    pub print: Option<PrintUpdate>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
