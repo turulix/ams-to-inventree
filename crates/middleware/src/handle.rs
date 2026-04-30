@@ -1,5 +1,4 @@
 use crate::message::{AmsMessage, AmsTray};
-use inventree::apis::configuration::{ApiKey, Configuration};
 use inventree::apis::stock_api::{StockListParams, StockRemoveCreateParams};
 use inventree::apis::{Api, ApiClient};
 use inventree::models::{StockAdjustmentItem, StockRemove};
