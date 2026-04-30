@@ -4,28 +4,33 @@ use inventree::apis::stock_api::{StockListParams, StockRemoveCreateParams};
 use inventree::apis::{Api, ApiClient};
 use inventree::models::{StockAdjustmentItem, StockRemove};
 use log::{debug, info, warn};
-use settings::SETTINGS;
 use std::str::FromStr;
-use std::sync::Arc;
 
-pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
-    let inv_api = ApiClient::new(Arc::new(Configuration {
-        base_path: SETTINGS.inventree_url.clone(),
-        api_key: Some(ApiKey {
-            key: SETTINGS.inventree_token.clone(),
-            prefix: Some("Token".to_string()),
-        }),
-        ..Default::default()
-    }));
+// Only update if more than 1 gram changed to prevent API spam from micro-updates
+const MIN_USAGE_THRESHOLD: f64 = 1.0;
+// Max allowed grams to remove in a single update tick.
+// A printer physically cannot extrude 100g in the few seconds between AMS telemetry updates.
+const MAX_USAGE_SANITY_LIMIT: f64 = 100.0;
 
+pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<(), anyhow::Error> {
     for ams in &msg.ams {
         for tray in &ams.tray {
-            // Skip none tagged spools.
+            // Skip untagged spools or known invalid states
             if tray.tag_uid == "0000000000000000" || tray.remain == -1 {
                 continue;
             }
 
-            let numeric_tray_weight = f32::from_str(&tray.tray_weight)?;
+            let numeric_tray_weight = match f32::from_str(&tray.tray_weight) {
+                Ok(w) => w,
+                Err(e) => {
+                    warn!(
+                        "Failed to parse tray weight '{}' for tag {}: {}",
+                        tray.tray_weight, tray.tag_uid, e
+                    );
+                    continue;
+                }
+            };
+
             let expected_remaining_weight = numeric_tray_weight * (tray.remain as f32 / 100.0);
 
             let data = StockListParams::builder()
@@ -37,28 +42,25 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
             let item = match inv_api.stock_api().stock_list(data).await {
                 Ok(x) => x,
                 Err(e) => {
-                    return Err(anyhow::anyhow!(
+                    warn!(
                         "Failed to query Inventree API for batch code: {}, error: {:?}",
-                        &tray.tag_uid,
-                        e
-                    ));
+                        &tray.tag_uid, e
+                    );
+                    continue;
                 }
             };
 
             if item.results.is_empty() {
-                //TODO: Automatically create new spool.
-
+                // TODO: Automatically create new spool.
                 debug!(
                     "Could not find Stock Item for batch code: {}, expected remaining weight: {}g",
                     &tray.tag_uid, expected_remaining_weight
                 );
-
                 info!(
                     "Found Spool without matching Part: {}, TAG: {}",
                     get_filament_match_key(tray),
                     &tray.tag_uid
                 );
-
                 continue;
             }
 
@@ -71,28 +73,52 @@ pub async fn handle_ams_update(msg: &AmsMessage) -> Result<(), anyhow::Error> {
             }
 
             let stock_item = item.results.first().unwrap();
+            let diff = stock_item.quantity - expected_remaining_weight as f64;
 
-            if stock_item.quantity > expected_remaining_weight as f64 {
-                info!(
-                    "Updating Stock Item {} (batch code: {}) quantity from {} to {} based on AMS update",
-                    stock_item.pk, &tray.tag_uid, stock_item.quantity, expected_remaining_weight
+            if diff < MIN_USAGE_THRESHOLD {
+                // Ignore tiny floating point differences or micro-extrusions
+                continue;
+            }
+
+            // SMART SANITY CHECK: Differentiate between a glitch and a manual remeasure
+            if diff > MAX_USAGE_SANITY_LIMIT {
+                if expected_remaining_weight <= 0.0 {
+                    // Huge drop to exactly 0g. This is the AMS telemetry glitch.
+                    warn!(
+                        "Anomalous drop to 0g detected ({}g diff) for batch {}. Skipping to prevent accidental stock wipe.",
+                        diff, &tray.tag_uid
+                    );
+                    continue;
+                } else {
+                    // Huge drop, but there's still filament. This is your manual remeasurement.
+                    info!(
+                        "Large stock difference detected ({}g) for batch {}. Treating as manual remeasurement.",
+                        diff, &tray.tag_uid
+                    );
+                }
+            }
+
+            info!(
+                "Updating Stock Item {} (batch {}) quantity from {} to {}",
+                stock_item.pk, &tray.tag_uid, stock_item.quantity, expected_remaining_weight
+            );
+            let remove_params = StockRemoveCreateParams {
+                stock_remove: StockRemove {
+                    items: vec![StockAdjustmentItem {
+                        pk: stock_item.pk,
+                        quantity: diff.to_string(),
+                        ..Default::default()
+                    }],
+                    notes: Some("AMS Update - Removed".to_string()),
+                },
+            };
+
+            // Don't crash the loop if the removal fails
+            if let Err(e) = inv_api.stock_api().stock_remove_create(remove_params).await {
+                warn!(
+                    "Failed to update stock for batch code: {}. Error: {:?}",
+                    &tray.tag_uid, e
                 );
-
-                let diff = stock_item.quantity - expected_remaining_weight as f64;
-
-                inv_api
-                    .stock_api()
-                    .stock_remove_create(StockRemoveCreateParams {
-                        stock_remove: StockRemove {
-                            items: vec![StockAdjustmentItem {
-                                pk: stock_item.pk,
-                                quantity: diff.to_string(),
-                                ..Default::default()
-                            }],
-                            notes: Some("AMS Update - Removed".to_string()),
-                        },
-                    })
-                    .await?;
             }
         }
     }

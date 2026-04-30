@@ -5,12 +5,14 @@ mod tls_validator;
 use crate::handle::handle_ams_update;
 use crate::message::PrinterMessage;
 use crate::tls_validator::DangerAcceptAllCertVerifier;
+use inventree::apis::configuration::{ApiKey, Configuration};
+use inventree::apis::ApiClient;
 use log::{debug, error, info, warn};
-use rumqttc::Packet::Publish;
 use rumqttc::tokio_rustls::rustls::ClientConfig;
+use rumqttc::Packet::Publish;
 use rumqttc::{AsyncClient, Event, MqttOptions, Packet, QoS, Transport};
-use settings::SETTINGS;
 use settings::printer::PrinterConfig;
+use settings::SETTINGS;
 use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use tokio::sync::mpsc;
@@ -48,11 +50,20 @@ async fn monitor_printer(printer: PrinterConfig) {
     // 2. Spawn a dedicated worker task to process messages.
     // This ensures handle_ams_update NEVER blocks the MQTT event loop.
     tokio::spawn(async move {
+        let inv_api = ApiClient::new(Arc::new(Configuration {
+            base_path: SETTINGS.inventree_url.clone(),
+            api_key: Some(ApiKey {
+                key: SETTINGS.inventree_token.clone(),
+                prefix: Some("Token".to_string()),
+            }),
+            ..Default::default()
+        }));
+
         while let Some(payload) = rx.recv().await {
             match serde_json::from_str::<PrinterMessage>(&payload) {
                 Ok(serialized) => {
                     if let Some(msg) = serialized.print.and_then(|x| x.ams)
-                        && let Err(e) = handle_ams_update(&msg).await
+                        && let Err(e) = handle_ams_update(&inv_api, &msg).await
                     {
                         error!(
                             "Error handling AMS update for {}: {:?}",
