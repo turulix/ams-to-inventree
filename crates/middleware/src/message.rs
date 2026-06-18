@@ -27,6 +27,7 @@ pub struct AmsUnit {
 pub struct AmsTray {
     pub remain: i32,
     pub tag_uid: String,
+    pub tray_uuid: String,
     /// For example PLA, ABS, PETG, etc.
     pub tray_type: String,
     /// For example PLA Silk+

@@ -15,7 +15,7 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
     for ams in &msg.ams {
         for tray in &ams.tray {
             // Skip untagged spools or known invalid states
-            if tray.tag_uid == "0000000000000000" || tray.remain == -1 {
+            if tray.tray_uuid == "00000000000000000000000000000000" || tray.remain == -1 {
                 continue;
             }
 
@@ -24,7 +24,7 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
                 Err(e) => {
                     warn!(
                         "Failed to parse tray weight '{}' for tag {}: {}",
-                        tray.tray_weight, tray.tag_uid, e
+                        tray.tray_weight, tray.tray_uuid, e
                     );
                     continue;
                 }
@@ -33,7 +33,7 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
             let expected_remaining_weight = numeric_tray_weight * (tray.remain as f32 / 100.0);
 
             let data = StockListParams::builder()
-                .batch(tray.tag_uid.clone())
+                .batch(tray.tray_uuid.clone())
                 .part_detail(true)
                 .limit(10)
                 .build_struct();
@@ -43,7 +43,7 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
                 Err(e) => {
                     warn!(
                         "Failed to query Inventree API for batch code: {}, error: {:?}",
-                        &tray.tag_uid, e
+                        &tray.tray_uuid, e
                     );
                     continue;
                 }
@@ -53,12 +53,12 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
                 // TODO: Automatically create new spool.
                 debug!(
                     "Could not find Stock Item for batch code: {}, expected remaining weight: {}g",
-                    &tray.tag_uid, expected_remaining_weight
+                    &tray.tray_uuid, expected_remaining_weight
                 );
                 info!(
                     "Found Spool without matching Part: {}, TAG: {}",
                     get_filament_match_key(tray),
-                    &tray.tag_uid
+                    &tray.tray_uuid
                 );
                 continue;
             }
@@ -66,7 +66,7 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
             if item.results.len() > 1 {
                 warn!(
                     "Multiple Stock Items found for batch code: {}, expected remaining weight: {}g",
-                    &tray.tag_uid, expected_remaining_weight
+                    &tray.tray_uuid, expected_remaining_weight
                 );
                 continue;
             }
@@ -85,21 +85,21 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
                     // Huge drop to exactly 0g. This is the AMS telemetry glitch.
                     warn!(
                         "Anomalous drop to 0g detected ({}g diff) for batch {}. Skipping to prevent accidental stock wipe.",
-                        diff, &tray.tag_uid
+                        diff, &tray.tray_uuid
                     );
                     continue;
                 } else {
                     // Huge drop, but there's still filament. This is your manual remeasurement.
                     info!(
                         "Large stock difference detected ({}g) for batch {}. Treating as manual remeasurement.",
-                        diff, &tray.tag_uid
+                        diff, &tray.tray_uuid
                     );
                 }
             }
 
             info!(
                 "Updating Stock Item {} (batch {}) quantity from {} to {}",
-                stock_item.pk, &tray.tag_uid, stock_item.quantity, expected_remaining_weight
+                stock_item.pk, &tray.tray_uuid, stock_item.quantity, expected_remaining_weight
             );
             let remove_params = StockRemoveCreateParams {
                 stock_remove: StockRemove {
@@ -116,7 +116,7 @@ pub async fn handle_ams_update(inv_api: &ApiClient, msg: &AmsMessage) -> Result<
             if let Err(e) = inv_api.stock_api().stock_remove_create(remove_params).await {
                 warn!(
                     "Failed to update stock for batch code: {}. Error: {:?}",
-                    &tray.tag_uid, e
+                    &tray.tray_uuid, e
                 );
             }
         }
